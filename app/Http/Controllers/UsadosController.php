@@ -18,23 +18,29 @@ class UsadosController extends Controller
     	->orderBy('renavam')
     	->get();
 
-        $dataHoje = Carbon::today();
+        $data = Carbon::today();
+
+        $lojas = Loja::all();
 
     	$mensagem = $request->session()->get('mensagem');
 
-    	return view('usados.index', compact('usados', 'mensagem', 'dataHoje'));
+    	return view('usados.index', compact('usados', 'mensagem', 'data', 'lojas'));
     }
 
 
 
     public function filter(Request $request){
 
-    	//$usados = Usado::where('loja_id', $request->get('loja'))
-    	//->get();
+    	
 
+        $usados = Usado::where('loja_id', $request->get('loja_id'))
+    	->get();
+
+
+        /* 
         $data = $request->all();
 
-        $usados = DB::table('usados')
+         $usados = DB::table('usados')
         ->when(!empty($data['servicoPago']) , function ($query) use($data){
             return $query->where('loja_id', $request->get('loja_id'))
             ->where('servicoPago', $request->get('servicoPago'))
@@ -47,16 +53,18 @@ class UsadosController extends Controller
 
 
 
-        /* $usados = DB::table('usados')
+       $usados = DB::table('usados')
             ->where('loja_id', $request->get('loja_id'))
             ->where('servicoPago', $request->get('servicoPago'))
             ->whereBetween('data', [$request->get('periodo1'), $request->get('periodo2')])
             ->get(); */
 
+        $lojas = Loja::all();
+    	
 
-    	$mensagem = "loja 1";
+        $data = '';
 
-    	return view('usados.index', compact('usados', 'mensagem'));
+    	return view('usados.index', compact('usados',  'data', 'lojas'));
 
     }
 

@@ -34,7 +34,7 @@ Route::delete('/usados/remover/{id}', 'UsadosController@destroy');
 
 Route::get('/live_search', 'UsadosController@action')->name('live_search.action');
 Route::post('/usados/filtrar', 'UsadosController@filter');
-Route::get('/usados/{id}', 'UsadosController@edit')->name('editarServico');
+Route::get('/usados/{id}', 'UsadosController@edit')->name('editarUsado');
 
 
 
@@ -45,6 +45,8 @@ Route::post('/emplacamentos/atualizar', 'EmplacamentosController@update');
 Route::get('/emplacamentos/{id}', 'EmplacamentosController@edit')->name('editarEmplacamento');
 Route::delete('/emplacamentos/remover/{id}', 'EmplacamentosController@destroy');
 
+
+Route::get('/geral', 'GeralController@index')->name('listarGeral');
 
 
 

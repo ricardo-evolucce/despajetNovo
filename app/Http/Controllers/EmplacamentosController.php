@@ -19,11 +19,13 @@ class EmplacamentosController extends Controller
     	->orderBy('renavam')
     	->get();
 
-        $dataHoje = Carbon::today();
+        $data = Carbon::today();
+
+        $lojas = Loja::all();
 
     	$mensagem = $request->session()->get('mensagem');
 
-    	return view('emplacamentos.index', compact('emplacamentos', 'mensagem', 'dataHoje'));
+    	return view('emplacamentos.index', compact('emplacamentos', 'mensagem', 'data', 'lojas'));
     }
 
 

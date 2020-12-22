@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-Serviços de emplacamentos em todas as lojas | {{ \Carbon\Carbon::parse($dataHoje)->format('d/m/Y')}} 
+Serviços de emplacamentos em todas as lojas | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}} 
 @endsection
 
 
@@ -20,9 +20,9 @@ Serviços de emplacamentos em todas as lojas | {{ \Carbon\Carbon::parse($dataHoj
     <label for="inputEmail3" class="col-sm-1 col-form-label">Loja</label>
     <div class="col-sm-2">
       <select class="form-control-sm" name="loja_id">
-      	<option value="1">Gravatai</option>
-      	<option value="2">Taquara</option>
-      	<option value="3">Sertório</option>
+      	@foreach ($lojas as $loja)
+					<option value="{{$loja->id}}">{{$loja->nome}}</option>
+		@endforeach
       </select>
     </div>
  
@@ -58,13 +58,7 @@ Serviços de emplacamentos em todas as lojas | {{ \Carbon\Carbon::parse($dataHoj
 
 
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-1 col-form-label">Tipo</label>
-    <div class="col-sm-2">
-		<select class="form-control-sm">
-			<option>Transferência</option>
-			<option>2ª via de DUT</option>
-		</select>
-    </div>
+  
     
     <div class="col-sm-2">
 		<button class="btn btn-primary">Pesquisar</button>
@@ -141,11 +135,11 @@ Serviços de emplacamentos em todas as lojas | {{ \Carbon\Carbon::parse($dataHoj
 					<td>{{$emplacamento->placa}}</td>
 					<td>{{$emplacamento->renavam}}</td>			
 					<td>{{$emplacamento->loja->nome}}</td>
-					<td>{{$emplacamento->valorGuia}}</td>
-					<td>{{$emplacamento->valorIpva}}</td>
-					<td>{{$emplacamento->valorProvisorio}}</td>
-					<td>{{$emplacamento->valorPlacaEsp}}</td>
-					<td>{{$emplacamento->valorOutros}}</td>
+					<td  @if($emplacamento->guiaPago==0) class="text-danger" @endif>{{$emplacamento->valorGuia}}</td>
+					<td  @if($emplacamento->ipvaPago==0) class="text-danger" @endif>{{$emplacamento->valorIpva}}</td>
+					<td  @if($emplacamento->provisorioPago==0) class="text-danger" @endif>{{$emplacamento->valorProvisorio}}</td>
+					<td  @if($emplacamento->placaEspPago==0) class="text-danger" @endif>{{$emplacamento->valorPlacaEsp}}</td>
+					<td  @if($emplacamento->outrosPago==0) class="text-danger" @endif>{{$emplacamento->valorOutros}}</td>
 					<td></td>
 				</tr>
 			@endforeach
@@ -186,6 +180,9 @@ Serviços de emplacamentos em todas as lojas | {{ \Carbon\Carbon::parse($dataHoj
 					
 				</th>
 				<th>
+				</th><th>
+				</th>
+			<th>
 				</th></tfoot>
 	</table>
 </div>
@@ -228,21 +225,7 @@ Serviços de emplacamentos em todas as lojas | {{ \Carbon\Carbon::parse($dataHoj
 
 
 
-         drawCallback: function () {
-      var api = this.api();
 
-      var numFormat = $.fn.dataTable.render.number( '.', ',', 2, 'R$' ).display;
-
-
-      $( api.table().footer() ).html(
-        numFormat(api.column( [9,10,11], {page:'current'} ).data().sum())
-      );
-
-     
-
-
-
-    }
 
 
 

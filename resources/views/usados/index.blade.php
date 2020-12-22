@@ -4,16 +4,12 @@
 
 
 @section('cabecalho')
-Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($dataHoje)->format('d/m/Y')}} 
+Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}} 
 @endsection
 
 @section('conteudo')
 
-	@if(!empty($mensagem))
-		<div class="alert alert-success">
-		{{ $mensagem }}
-		</div>
-	@endif
+
 
 <div class="containder-fluid">
 <form action="/usados/filtrar" method="post">
@@ -22,9 +18,9 @@ Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($dataHoje)->for
     <label for="inputEmail3" class="col-sm-1 col-form-label">Loja</label>
     <div class="col-sm-2">
       <select class="form-control-sm" name="loja_id">
-      	<option value="1">Gravatai</option>
-      	<option value="2">Taquara</option>
-      	<option value="3">Sertório</option>
+      	@foreach($lojas as $loja)
+	      	<option value="{{$loja->id}}">{{$loja->nome}}</option>
+	    @endforeach
       </select>
     </div>
  
@@ -130,7 +126,7 @@ Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($dataHoje)->for
 			@foreach($usados as $usado)
 				<tr><td>{{$usado->id}}</td>
 					<td>{{$usado->data->format('d/m/Y')}}</td>
-					<td><a href="{{route('editarServico', $usado->id)}}">{{$usado->cliente->nome}}</a></td>
+					<td><a href="{{route('editarUsado', $usado->id)}}">{{$usado->cliente->nome}}</a></td>
 					<td>{{$usado->modelo}}</td>
 					<td>{{$usado->renavam}}</td>
 					<td>{{$usado->placa}}</td>
@@ -159,7 +155,7 @@ Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($dataHoje)->for
 					<td @if($usado->outrosPago==0) class="text-danger" @endif>
 						{{$usado->valorOutros}}
 					</td>
-					<td>1</td>
+					<td></td>
 				</tr>
 			@endforeach
 		</tbody>
@@ -239,21 +235,7 @@ Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($dataHoje)->for
 
 
 
-         drawCallback: function () {
-      var api = this.api();
-
-      var numFormat = $.fn.dataTable.render.number( '.', ',', 2, 'R$' ).display;
-
-
-      $( api.table().footer() ).html(
-        numFormat(api.column( [9,10,11], {page:'current'} ).data().sum())
-      );
-
-     
-
-
-
-    }
+  
 
 
 
