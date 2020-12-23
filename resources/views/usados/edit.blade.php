@@ -5,7 +5,7 @@ Editar serviço de usado
 @endsection
 
 @section('conteudo')
-<form method="post" action="/usados/atualizar">
+<form method="post" action="/servicos/atualizar">
 	@csrf
 	<h6>Dados do cliente</h6>
 		<div class="row border-top pb-5">
@@ -176,12 +176,12 @@ Editar serviço de usado
 
 
 
-		<button class="btn btn-info mt-2">Cadastrar</button>
+		<button class="btn btn-info mt-2">Atualizar</button>
 
 </form>
 
 
-		<form method="post" action="/usados/remover/{{$usado->id}}"
+		<form method="post" action="/servicos/deletar/{{$usado->servico}}/{{$usado->id}}"
 						onsubmit="return confirm('Confirma remoção de {{$usado->id}} ?')">
 						@csrf
 						@method('DELETE')

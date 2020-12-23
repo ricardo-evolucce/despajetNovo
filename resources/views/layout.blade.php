@@ -41,13 +41,13 @@
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/usados/cadastrar">Cadastrar usados</a>
+            <a class="nav-link" href="/usados/criar">Criar usado</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/usados">Listar usados</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/emplacamentos/cadastrar">Cadastrar emplacamentos</a>
+            <a class="nav-link" href="/emplacamentos/criar">Criar emplacamento</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/emplacamentos">Listar emplacamentos</a>
@@ -56,7 +56,7 @@
             <a class="nav-link" href="/clientes">Clientes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/clientes/cadastrar">Adicionar cliente</a>
+            <a class="nav-link" href="/clientes/criar">Criar cliente</a>
           </li>
             <li class="nav-item">
             <a class="nav-link" href="/geral">Geral</a>

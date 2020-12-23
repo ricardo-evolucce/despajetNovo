@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-Resultado geral | {{ \Carbon\Carbon::parse($dataHoje)->format('d/m/Y')}} 
+Resultado geral | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}} 
 @endsection
 
 
@@ -120,46 +120,27 @@ Resultado geral | {{ \Carbon\Carbon::parse($dataHoje)->format('d/m/Y')}}
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($emplacamentos as $emplacamento)
-			<tr><td>{{$emplacamento->id}}</td>
-				<td>{{$emplacamento->data->format('d/m/Y')}}</td>
-			
-				<td><a href="{{route('editarEmplacamento', $emplacamento->id)}}">{{$emplacamento->cliente->nome}}</a></td>
-				<td>{{$emplacamento->modelo}}</td>
-				<td>{{$emplacamento->chassi}}</td>
-				<td>{{$emplacamento->placa}}</td>
-				<td>{{$emplacamento->renavam}}</td>			
-				<td>{{$emplacamento->loja->nome}}</td>
-				<td  @if($emplacamento->guiaPago==0) class="text-danger" @endif>{{$emplacamento->valorGuia}}</td>
-				<td></td>
-				<td  @if($emplacamento->ipvaPago==0) class="text-danger" @endif>{{$emplacamento->valorIpva}}</td>
-				<td  @if($emplacamento->provisorioPago==0) class="text-danger" @endif>{{$emplacamento->valorProvisorio}}</td>
-				<td  @if($emplacamento->placaEspPago==0) class="text-danger" @endif>{{$emplacamento->valorPlacaEsp}}</td>
-				<td  @if($emplacamento->outrosPago==0) class="text-danger" @endif>{{$emplacamento->valorOutros}}</td>
+			@foreach($servicos as $servico)
+			<tr><td>{{$servico->id}}</td>
+				<td>{{$servico->data->format('d/m/Y')}}</td>			
+				<td>{{$servico->cliente->nome}}</td>
+				<td>{{$servico->modelo}}</td>
+				<td>{{$servico->chassi}}</td>
+				<td>{{$servico->placa}}</td>
+				<td>{{$servico->renavam}}</td>			
+				<td>{{$servico->loja->nome}}</td>
+				<td  @if($servico->guiaPago==0) class="text-danger" @endif>{{$servico->valorGuia}}</td>	
+				<td  @if($servico->servicoPago==0) class="text-danger" @endif>{{$servico->valorServico}}</td>		
+				<td  @if($servico->ipvaPago==0) class="text-danger" @endif>{{$servico->valorIpva}}</td>
+				<td  @if($servico->provisorioPago==0) class="text-danger" @endif>{{$servico->valorProvisorio}}</td>
+				<td  @if($servico->placaEspPago==0) class="text-danger" @endif>{{$servico->valorPlacaEsp}}</td>				
+				<td  @if($servico->outrosPago==0) class="text-danger" @endif>{{$servico->valorOutros}}</td>		
 				<td></td>
 			</tr>
 			@endforeach
 
-			@foreach($usados as $usado)
-			<tr><td>{{$usado->id}}</td>
-				<td>{{$usado->data->format('d/m/Y')}}</td>
-			
-				<td><a href="{{route('editarUsado', $usado->id)}}">{{$usado->cliente->nome}}</a></td>
-				<td>{{$usado->modelo}}</td>
-				<td>{{$usado->chassi}}</td>
-				<td>{{$usado->placa}}</td>
-				<td>{{$usado->renavam}}</td>			
-				<td>{{$usado->loja->nome}}</td>
-				<td></td>
-				<td  @if($usado->servicoPago==0) class="text-danger" @endif>{{$usado->valorServico}}</td>
-				
-				<td  @if($usado->ipvaPago==0) class="text-danger" @endif>{{$usado->valorIpva}}</td>
-				<td  @if($usado->provisorioPago==0) class="text-danger" @endif>{{$usado->valorProvisorio}}</td>
-				<td  @if($usado->placaEspPago==0) class="text-danger" @endif>{{$usado->valorPlacaEsp}}</td>
-				<td  @if($usado->outrosPago==0) class="text-danger" @endif>{{$usado->valorOutros}}</td>
-				<td></td>
-			</tr>
-			@endforeach
+
+
 		</tbody>
 		<tfoot><th>
 

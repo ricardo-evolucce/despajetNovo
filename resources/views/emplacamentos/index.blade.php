@@ -7,11 +7,6 @@ Serviços de emplacamentos em todas as lojas | {{ \Carbon\Carbon::parse($data)->
 
 @section('conteudo')
 
-	@if($mensagem)
-		<div class="alert alert-success">
-		{{ $mensagem }}
-		</div>
-	@endif
 
 <div class="containder-fluid">
 <form action="/emplacamentos/filtrar" method="post">

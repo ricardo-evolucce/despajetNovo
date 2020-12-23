@@ -1,12 +1,15 @@
 @extends('layout')
 
 @section('cabecalho')
-Cadastrar serviço de emplacamento
+Criar serviço de emplacamento
 @endsection
 
 @section('conteudo')
-<form method="post" action="/emplacamentos/cadastrar">
+<form method="post" action="/servicos/armazenar">
 	@csrf
+
+	<input type="hidden" name="servico" value="E">
+
 	<h6>Dados do cliente</h6>
 		<div class="row border-top pb-5">
 			<div class="col col-6">
@@ -179,7 +182,7 @@ Cadastrar serviço de emplacamento
 
 
 
-		<button class="btn btn-info mt-2">Cadastrar</button>
+		<button class="btn btn-info mt-2">Concluir</button>
 </form>
 
 

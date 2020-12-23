@@ -5,8 +5,11 @@ Cadastrar serviço de usado
 @endsection
 
 @section('conteudo')
-<form method="post" action="/usados/cadastrar">
+<form method="post" action="/servicos/armazenar">
 	@csrf
+
+	<input type="hidden" name="servico" value="U">
+
 	<h6>Dados do cliente</h6>
 		<div class="row border-top pb-5">
 			<div class="col col-6">

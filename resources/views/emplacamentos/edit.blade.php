@@ -5,9 +5,12 @@ Editar serviço de emplacamento
 @endsection
 
 @section('conteudo')
-<form method="post" action="/emplacamentos/atualizar">
+<form method="post" action="/servicos/atualizar">
 	@csrf
 	<h6>Dados do cliente</h6>
+
+	<input type="hidden" value="E" name="servico">
+
 		<div class="row border-top pb-5">
 			<div class="col col-6">
 				<label for="nome">Nome</label>
@@ -219,10 +222,10 @@ Editar serviço de emplacamento
 
 
 
-		<button class="btn btn-info mt-2">Cadastrar</button>
+		<button class="btn btn-info mt-2">Atualizar</button>
 </form>
 
-	<form method="post" action="/emplacamentos/remover/{{$emplacamento->id}}"
+	<form method="post" action="/servicos/deletar/{{$emplacamento->servico}}/{{$emplacamento->id}}"
 						onsubmit="return confirm('Confirma remoção de {{$emplacamento->id}} ?')">
 						@csrf
 						@method('DELETE')

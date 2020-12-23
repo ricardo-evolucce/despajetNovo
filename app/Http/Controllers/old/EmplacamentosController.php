@@ -32,34 +32,18 @@ class EmplacamentosController extends Controller
 
     public function filter(Request $request){
 
-    	//$emplacamentos = emplacamento::where('loja_id', $request->get('loja'))
-    	//->get();
 
-        $data = $request->all();
-
-        $emplacamentos = DB::table('emplacamentos')
-        ->when(!empty($data['servicoPago']) , function ($query) use($data){
-            return $query->where('loja_id', $request->get('loja_id'))
-            ->where('servicoPago', $request->get('servicoPago'))
-            ->whereBetween('data', [$request->get('periodo1'), $request->get('periodo2')]);
-        }, function ($query) {
-        return $query->where('loja_id', $data['servicoPago'])
-            ->whereBetween('data', [$request->get('periodo1'), $request->get('periodo2')]);
-        })
+         $emplacamentos = Emplacamento::where('loja_id', $request->get('loja_id'))
         ->get();
 
+        $lojas = Loja::all();
 
 
-        /*$emplacamentos = DB::table('emplacamentos')
-            ->where('loja_id', $request->get('loja_id'))
-            ->where('servicoPago', $request->get('servicoPago'))
-            ->whereBetween('data', [$request->get('periodo1'), $request->get('periodo2')])
-            ->get();*/
+        $data = '';
 
+    	
 
-    	$mensagem = "loja 1";
-
-    	return view('emplacamentos.index', compact('emplacamentos', 'mensagem'));
+    	return view('emplacamentos.index', compact('emplacamentos', 'data', 'lojas'));
 
     }
 

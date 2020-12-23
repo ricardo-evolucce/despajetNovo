@@ -18,35 +18,52 @@ Route::get('/', function () {
 });
 
 
+//Clientes
 Route::get('/clientes', 'ClientesController@index');
-Route::get('/clientes/cadastrar', 'ClientesController@create');
-Route::post('clientes/cadastrar', 'ClientesController@store');
+Route::get('/clientes/criar', 'ClientesController@create');
+Route::post('clientes/armazenar', 'ClientesController@store');
 Route::get('/clientes/{id}', 'ClientesController@edit')->name('editarCliente');
 Route::post('/clientes/atualizar', 'ClientesController@update');
 
+//Usados
+Route::get('/usados', 'ServicosController@indexUsados')->name('listarUsados');
+Route::get('/usados/criar', 'ServicosController@createUsado')->name('criarUsado');
+Route::get('/usados/{id}', 'ServicosController@editUsado')->name('editarUsado');
 
-Route::get('/usados', 'UsadosController@index')->name('listarUsados');
-Route::get('/usados/cadastrar', 'UsadosController@create');
-Route::post('usados/cadastrar', 'UsadosController@store');
-Route::post('usados/pesquisar', 'UsadosController@search');
-Route::post('usados/atualizar', 'UsadosController@update');
-Route::delete('/usados/remover/{id}', 'UsadosController@destroy');
+//Emplacamentos
+Route::get('/emplacamentos', 'ServicosController@indexEmplacamentos')->name('listarEmplacamentos');
+Route::get('/emplacamentos/criar', 'ServicosController@createEmplacamento')->name('criarEmplacamento');
+Route::get('/emplacamentos/{id}', 'ServicosController@editEmplacamento')->name('editarEmplacamento');
 
-Route::get('/live_search', 'UsadosController@action')->name('live_search.action');
+
+//Salvar e atualizar ambos
+Route::post('/servicos/atualizar', 'ServicosController@update');
+Route::post('/servicos/armazenar', 'ServicosController@store');
+Route::delete('/servicos/deletar/{servico}/{id}', 'ServicosController@destroy');
+
+
+
+
+Route::get('/live_search', 'ClientesController@action')->name('live_search.action');
+
+
+
+
+
+
+
+
 Route::post('/usados/filtrar', 'UsadosController@filter');
-Route::get('/usados/{id}', 'UsadosController@edit')->name('editarUsado');
+Route::post('/servicos/filtrar', 'EmplacamentosController@filter');
 
 
 
-Route::get('/emplacamentos', 'EmplacamentosController@index')->name('listarEmplacamentos');
-Route::get('emplacamentos/cadastrar', 'EmplacamentosController@create');
-Route::post('emplacamentos/cadastrar', 'EmplacamentosController@store');
-Route::post('/emplacamentos/atualizar', 'EmplacamentosController@update');
-Route::get('/emplacamentos/{id}', 'EmplacamentosController@edit')->name('editarEmplacamento');
-Route::delete('/emplacamentos/remover/{id}', 'EmplacamentosController@destroy');
+Route::get('/servicos/{id}', 'ServicosController@edit')->name('editarServico');
+Route::delete('/servicos/remover/{id}', 'ServicosController@destroy');
+Route::post('/servicos/filtrar', 'ServicosController@filter');
 
 
-Route::get('/geral', 'GeralController@index')->name('listarGeral');
+Route::get('/geral', 'ServicosController@index')->name('listarServicos');
 
 
 

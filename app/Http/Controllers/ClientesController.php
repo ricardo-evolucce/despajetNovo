@@ -60,9 +60,6 @@ class ClientesController extends Controller
 
 
 
-
-
-
     public function action(Request $request)
     {
         if($request->ajax())
