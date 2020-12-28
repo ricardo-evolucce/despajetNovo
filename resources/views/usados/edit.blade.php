@@ -7,6 +7,9 @@ Editar serviço de usado
 @section('conteudo')
 <form method="post" action="/servicos/atualizar">
 	@csrf
+
+	<input type="hidden" name="servico" value="U">
+
 	<h6>Dados do cliente</h6>
 		<div class="row border-top pb-5">
 			<div class="col col-6">
@@ -118,8 +121,10 @@ Editar serviço de usado
 							@switch($usado->servicoPago)
 								@case(1)
 								<option value="1">Pago</option>
+								<option value="0">Não pago</option>
 								@case(0)
 								<option value="0">Não pago</option>
+								<option value="1">Pago</option>
 							@endswitch
 					</select>
 				</span>
@@ -132,8 +137,10 @@ Editar serviço de usado
 						@switch($usado->ipvaPago)
 								@case(1)
 								<option value="1">Pago</option>
+								<option value="0">Não pago</option>
 								@case(0)
 								<option value="0">Não pago</option>
+								<option value="1">Pago</option>
 						@endswitch
 					</select>
 				</span>
@@ -149,8 +156,10 @@ Editar serviço de usado
 							@switch($usado->outrosPago)
 								@case(1)
 								<option value="1">Pago</option>
+								<option value="0">Não pago</option>
 								@case(0)
 								<option value="0">Não pago</option>
+								<option value="1">Pago</option>
 						@endswitch
 					</select>
 				</span>

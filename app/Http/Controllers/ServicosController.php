@@ -14,267 +14,332 @@ use Carbon\Carbon;
 class ServicosController extends Controller
 {
 
+  public function index(){
 
-      public function index(){
+    $servicos = Servico::where('data', Carbon::today())
+    ->orderBy('renavam')
+    ->get();
 
-        $servicos = Servico::where('data', Carbon::today())
-        ->orderBy('renavam')
-        ->get();
+    $data = Carbon::today();
+    $lojas = Loja::all();        
 
-        $data = Carbon::today();
-        $lojas = Loja::all();        
+    return view('geral.index', compact('servicos', 'data', 'lojas'));
+}
 
-        return view('geral.index', compact('servicos', 'data', 'lojas'));
-    }
 
 
-    
+public function indexUsados(){
 
-    public function indexUsados(Request $request){
-
-        $usados = Servico::where('data', Carbon::today())
-        ->where('servico', 'U')
-        ->orderBy('renavam')
-        ->get();
-
-        $data = Carbon::today();
-
-        $lojas = Loja::all();
-
-        
-
-        return view('usados.index', compact('usados','data', 'lojas'));
-    }
-
-
-
-    public function indexEmplacamentos(Request $request){
-
-        $emplacamentos = Servico::where('data', Carbon::today())
-        ->where('servico', 'E')
-        ->orderBy('renavam')
-        ->get();
-
-        $data = Carbon::today();
-
-        $lojas = Loja::all();
-
-        
-
-        return view('emplacamentos.index', compact('emplacamentos','data', 'lojas'));
-    }
-
-
-
-     public function createUsado(){
-
-        $lojas = Loja::all();
-        $tiposervicos = Tiposervico::all();
-
-        return view('usados.create', compact('lojas', 'tiposervicos'));
-    }
-
-
-
-    public function createEmplacamento(){
-
-        $lojas = Loja::all();
-        $tiposervicos = Tiposervico::all();
-
-        return view('emplacamentos.create', compact('lojas', 'tiposervicos'));
-    }
-
-
-
-        public function editUsado(Request $request)
-        {
-
-
-            $servicos = Servico::all();
-            $usado = $servicos->find($request->id);  
-
-
-            $tiposervicos = Tiposervico::all();                
-
-            $lojas = Loja::all();
-
-            return view('usados.edit', compact('tiposervicos', 'lojas', 'usado'));
-
-        }
-
-
-         public function editEmplacamento(Request $request)
-        {
-
-
-            $servicos = Servico::all();
-            $emplacamento = $servicos->find($request->id);  
-
-
-            $tiposervicos = Tiposervico::all();                
-
-            $lojas = Loja::all();
-
-            return view('emplacamentos.edit', compact('tiposervicos', 'lojas', 'emplacamento'));
-
-        }
-
-
-
-
-
-    public function filter(Request $request){
-
-
-         $servicos = Servico::where('loja_id', $request->get('loja_id'))
-         
-        ->get();
-
-        $lojas = Loja::all();
-
-
-        $data = '';
-
-    	
-
-    	return view('servicos.index', compact('servicos', 'data', 'lojas'));
-
-    }
-
-
-
-
-
-
-
-
-
-    public function action(Request $request)
-    {
-        if($request->ajax())
-        {
-            $query = $request->get('query');
-
-            if($query != '')
-            {
-                $data = DB::table('clientes')
-                        ->where('cpf', $query)
-                        ->get();
-            }
-          
-            echo json_encode($data);    
-
-        }
-    }
-
-
+    $usados = Servico::where('data', Carbon::today())
+    ->where('servico', 'U')
+    ->orderBy('data', 'ASC')
+    ->get();
 
    
+    $loja_id = '';
+    $lojas = Loja::all();
+    $tipoServicos = Tiposervico::all();          
+
+    return view('usados.index', compact('usados', 'loja_id', 'lojas', 'tipoServicos'));
+}
+
+
+
+public function indexEmplacamentos(Request $request){
+
+    $emplacamentos = Servico::where('data', Carbon::today())
+    ->where('servico', 'E')
+    ->orderBy('renavam')
+    ->get();
+
+    $data = Carbon::today();
+
+    $lojas = Loja::all();        
+
+    return view('emplacamentos.index', compact('emplacamentos','data', 'lojas'));
+}
+
+
+
+public function createUsado(){
+
+    $lojas = Loja::all();
+    $tiposervicos = Tiposervico::all();
+
+    return view('usados.create', compact('lojas', 'tiposervicos'));
+}
+
+
+
+public function createEmplacamento(){
+
+    $lojas = Loja::all();
+    $tiposervicos = Tiposervico::all();
+
+    return view('emplacamentos.create', compact('lojas', 'tiposervicos'));
+}
+
+
+
+public function editUsado(Request $request)
+{
+
+
+    $servicos = Servico::all();
+    $usado = $servicos->find($request->id);  
+
+    $tiposervicos = Tiposervico::all();                
+
+    $lojas = Loja::all();
+
+    return view('usados.edit', compact('tiposervicos', 'lojas', 'usado'));
+
+}
+
+
+public function editEmplacamento(Request $request)
+{
+
+
+    $servicos = Servico::all();
+    $emplacamento = $servicos->find($request->id);  
+
+    $tiposervicos = Tiposervico::all();                
+
+    $lojas = Loja::all();
+
+    return view('emplacamentos.edit', compact('tiposervicos', 'lojas', 'emplacamento'));
+
+}
 
 
 
 
 
+public function filter(Request $request){
 
-    public function store(Request $request)
-    {
+    //$servicos = Servico::where('loja_id', $request->get('loja_id'))
+    $servicos = Servico::whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))      
+    ->where('servico', 'LIKE', $request->servico)
+    ->orderBy('data', 'DESC')
+    ->get();
 
-    	$servico = Servico::create($request->all());
+    $lojas = Loja::all();
 
-    	$request->session()
-    	->put(
-    		'mensagem',
-    			"Servico {$servico->renavam} cadastrado com sucesso"
-    		);
+    $data = '';    	
 
-        if($request->servico == 'U'){
+    return view('geral.index', compact('servicos', 'data', 'lojas'));
 
-    	return redirect('/usados');   	
+}
 
-        }
 
-        if($request->servico == 'E'){
 
-        return redirect('/emplacamentos');       
 
-        }
+public function filterUsados(Request $request){
 
+    switch ($request->pagamentos) {
+
+            //caso pagamento AMBOS
+        case '%':
+        $usados = Servico::where('servico', 'U')
+        ->where('loja_id', $request->loja_id)
+        ->where('tiposervico_id', $request->tiposervico_id)      
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->orderBy('data', 'DESC')
+        ->get();
+        break;   
+
+            //caso pagamento PAGOS
+        case '1':
+        $usados = Servico::where('servico', 'U')
+        ->where('loja_id', $request->loja_id)
+        ->where('tiposervico_id', $request->tiposervico_id)      
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->where('servicoPago', '1')
+        ->where('ipvaPago', '1')
+        ->where('outrosPago', '1')
+        ->orderBy('data', 'DESC')
+        ->get();
+
+        break;
+
+            //caso pagamento NÃO PAGOS
+        case '2':
+        $usados = Servico::where('servico', 'U')
+        ->where('loja_id', $request->loja_id)
+        ->where('tiposervico_id', $request->tiposervico_id)
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->where(function ($query) {  
+        $query->where('servicoPago', 'LIKE', '0')
+         ->orWhere('ipvaPago', 'LIKE', '0')
+         ->orWhere('outrosPago', 'LIKE', '0');
+        })
+        ->get();
+
+
+
+        break;
+
+        default:
+                # code...
+        break;
     }
 
+    $tipoServico = Tiposervico::find($request->tiposervico_id);
+
+    $pagamento = $request->pagamentos;
+
+    $dataInicio = $request->dataInicio;
+
+    $dataFim = $request->dataFim;
+
+    $tipoServicos = Tiposervico::all();
+
+    $loja = Loja::find($request->loja_id);
+
+    $lojas = Loja::all();
+
+    return view('usados.index', compact('usados', 'tipoServico', 'pagamento', 'dataInicio', 'dataFim', 'tipoServicos', 'loja', 'lojas'));
+
+}
 
 
-    public function update(Request $request)
+
+
+
+
+
+
+
+public function action(Request $request)
+{
+    if($request->ajax())
     {
-        $servico = Servico::find($request->id);
+        $query = $request->get('query');
 
-        $servico->cliente_id = $request->cliente_id;
-        $servico->tiposervico_id = $request->tiposervico_id;
-        $servico->modelo = $request->modelo;
-        $servico->placa = $request->placa;
-        $servico->renavam = $request->renavam;
-        $servico->data = $request->data;
-        $servico->chassi = $request->chassi;       
-        $servico->loja_id = $request->loja_id;
-        $servico->numeroPedido = $request->numeroPedido;
-        $servico->valorGuia = $request->valorGuia;
-        $servico->guiaPago = $request->guiaPago;        
-        $servico->valorIpva = $request->valorIpva;
-        $servico->ipvaPago = $request->ipvaPago;
-        $servico->valorProvisorio = $request->valorProvisorio;
-        $servico->provisorioPago = $request->provisorioPago;
-        $servico->valorPlacaEsp = $request->valorPlacaEsp;
-        $servico->placaEspPago = $request->placaEspPago;
-        $servico->valorOutros = $request->valorOutros;
-        $servico->outrosPago = $request->outrosPago;
+        if($query != '')
+        {
+            $data = DB::table('clientes')
+            ->where('cpf', $query)
+            ->get();
+        }
 
-           
+        echo json_encode($data);    
 
-        $servico->save();
+    }
+}
 
 
-        $request->session()
-        ->flash(
-            'mensagem',
-                "servico {$servico->renavam} atualizado com sucesso"
-            );
 
 
-        if($request->servico =='U'){
+
+
+
+
+
+
+public function store(Request $request)
+{
+
+   $servico = Servico::create($request->all());
+
+   $request->session()
+   ->put(
+      'mensagem',
+      "Servico {$servico->renavam} cadastrado com sucesso"
+  );
+
+   if($request->servico == 'U'){
+
+       return redirect('/usados');   	
+
+   }
+
+   if($request->servico == 'E'){
+
+    return redirect('/emplacamentos');       
+
+}
+
+}
+
+
+
+public function update(Request $request)
+{
+    $servico = Servico::find($request->id);
+
+    $servico->cliente_id = $request->cliente_id;
+    $servico->tiposervico_id = $request->tiposervico_id;
+    $servico->modelo = $request->modelo;
+    $servico->placa = $request->placa;
+    $servico->renavam = $request->renavam;
+    $servico->data = $request->data;
+    $servico->chassi = $request->chassi;       
+    $servico->loja_id = $request->loja_id;
+    $servico->numeroPedido = $request->numeroPedido;
+    $servico->valorGuia = $request->valorGuia;
+    $servico->guiaPago = $request->guiaPago;        
+    $servico->valorIpva = $request->valorIpva;
+    $servico->ipvaPago = $request->ipvaPago;
+    $servico->valorServico = $request->valorServico;
+    $servico->servicoPago = $request->servicoPago;
+    $servico->provisorioPago = $request->provisorioPago;
+    $servico->valorProvisorio = $request->valorProvisorio;
+    $servico->provisorioPago = $request->provisorioPago;
+    $servico->valorPlacaEsp = $request->valorPlacaEsp;
+    $servico->placaEspPago = $request->placaEspPago;
+    $servico->valorOutros = $request->valorOutros;
+    $servico->outrosPago = $request->outrosPago;
+
+
+
+    $servico->save();
+
+
+    $request->session()
+    ->flash(
+        'mensagem',
+        "servico {$servico->renavam} atualizado com sucesso"
+    );
+
+
+    if($request->servico =='U'){
         return redirect('/usados'); 
-        }
+    }
 
-        if($request->servico =='E'){
+    if($request->servico =='E'){
         return redirect('/emplacamentos'); 
-        }
-
-
     }
 
 
+}
 
 
-    public function destroy(Request $request)
-    {
-
-        $servico = Servico::find($request->id);
 
 
-        Servico::destroy($request->id);
-        $request->session()
-            ->flash
-            ('mensagem',
-                "Servico '{$request->id}' apagado com sucesso."
-            );
+public function destroy(Request $request)
+{
 
-        if($request->servico =='E'){
+    $servico = Servico::find($request->id);
+
+
+    Servico::destroy($request->id);
+    $request->session()
+    ->flash
+    ('mensagem',
+        "Servico '{$request->id}' apagado com sucesso."
+    );
+
+    if($request->servico =='E'){
         return redirect('/emplacamentos'); 
-        }
+    }
 
-        if($request->servico =='U'){
+    if($request->servico =='U'){
         return redirect('/usados'); 
-        }
     }
-    
+}
+
 
 
 

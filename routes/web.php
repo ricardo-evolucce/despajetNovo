@@ -45,7 +45,7 @@ Route::delete('/servicos/deletar/{servico}/{id}', 'ServicosController@destroy');
 
 
 Route::get('/live_search', 'ClientesController@action')->name('live_search.action');
-
+Route::post('/servicos/filterUsados', 'ServicosController@filterUsados');
 
 
 
@@ -64,6 +64,7 @@ Route::post('/servicos/filtrar', 'ServicosController@filter');
 
 
 Route::get('/geral', 'ServicosController@index')->name('listarServicos');
+Route::post('/geral/filtrar', 'ServicosController@filter');
 
 
 

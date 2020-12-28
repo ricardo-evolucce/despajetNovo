@@ -1,10 +1,35 @@
 @extends('layout')
 
-
-
-
 @section('cabecalho')
-Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}} 
+Serviços de {{$tipoServico = $tipoServico->nome ?? 'usados'}} | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
+
+|
+
+@if(!empty($dataFim))
+	{{\Carbon\Carbon::parse($dataInicio)->format('d/m/Y')}} até {{\Carbon\Carbon::parse($dataFim)->format('d/m/Y')}}
+@else
+	{{\Carbon\Carbon::now()->format('d/m/Y')}}
+@endif
+
+|
+
+	@if(isset($pagamento))
+		@switch($pagamento)
+			@case(1)
+				Pagos
+			@break
+			@case(2)
+				Não pagos
+			@break							
+			@default
+				Pagos e não pagos
+			@break
+
+		@endswitch
+	@else
+		Pagos e não pagos
+	@endif
+
 @endsection
 
 @section('conteudo')
@@ -12,8 +37,12 @@ Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($data)->format(
 
 
 <div class="containder-fluid">
-<form action="/usados/filtrar" method="post">
+<form action="/servicos/filterUsados" method="post">
 	@csrf
+
+	<input type="hidden" value="U" name="servico">
+
+
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-1 col-form-label">Loja</label>
     <div class="col-sm-2">
@@ -29,10 +58,10 @@ Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($data)->format(
   
     <label for="inputEmail3" class="col-sm-1 col-form-label">Pagamento</label>
     <div class="col-sm-2">
-      <select class="form-control-sm" name="servicoPago">
-      	<option value="">Ambos</option>
+      <select class="form-control-sm" name="pagamentos">
+      	<option value="%">Ambos</option>
       	<option value="1">Pagos</option>
-      	<option value="0">Não pagos</option>
+      	<option value="2">Não pagos</option>
       </select>
     </div>
   </div>
@@ -41,10 +70,10 @@ Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($data)->format(
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-1 col-form-label">Período</label>
     <div class="col-sm-2">
-		<input type="date" class="form-control-sm" name="periodo1">
+		<input type="date" class="form-control-sm" name="dataInicio">
     </div>
     <div class="col-sm-2">
-		até <input type="date" class="form-control-sm" name="periodo2">
+		até <input type="date" class="form-control-sm" name="dataFim">
     </div>
      
 
@@ -58,9 +87,10 @@ Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($data)->format(
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-1 col-form-label">Tipo</label>
     <div class="col-sm-2">
-		<select class="form-control-sm">
-			<option>Transferência</option>
-			<option>2ª via de DUT</option>
+		<select class="form-control-sm" name="tiposervico_id">
+			@foreach($tipoServicos as $tipoServico)
+	      	<option value="{{$tipoServico->id}}">{{$tipoServico->nome}}</option>
+	   		@endforeach
 		</select>
     </div>
     
@@ -155,7 +185,10 @@ Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($data)->format(
 					<td @if($usado->outrosPago==0) class="text-danger" @endif>
 						{{$usado->valorOutros}}
 					</td>
-					<td></td>
+				
+					
+
+					<td>{{$usado->valorServico + $usado->valorIpva + $usado->valorOutros}}</td>
 				</tr>
 			@endforeach
 		</tbody>
@@ -227,14 +260,47 @@ Serviços de usados em todas as lojas | {{ \Carbon\Carbon::parse($data)->format(
             { data: "ipva",  render: $.fn.dataTable.render.number( '.', ',', 2, '' ) },
             { data: "outros", 
              render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
-            { data: "total" },
+            { data: "total", render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
           
         ], 
 
 
 
 
+        "footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+ 
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+ 
+            // Total over all pages
+            total = api
+                .column( 12 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Total over this page
+            pageTotal = api
+                .column( 12, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
 
+
+ 
+            // Update footer
+            $( api.column( 12 ).footer() ).html(
+                pageTotal
+            );
+        }
   
 
 

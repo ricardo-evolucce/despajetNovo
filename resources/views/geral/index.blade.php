@@ -27,10 +27,10 @@ Resultado geral | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}}
 
 			<label for="inputEmail3" class="col-sm-1 col-form-label">Serviço</label>
 			<div class="col-sm-2">
-				<select class="form-control-sm" name="servicoPago">
+				<select class="form-control-sm" name="servico">
 					<option value="">Ambos</option>
-					<option value="1">Usado</option>
-					<option value="2">Emplacamentos</option>
+					<option value="U">Usado</option>
+					<option value="E">Emplacamentos</option>
 				</select>
 			</div>
 		</div>
@@ -38,8 +38,8 @@ Resultado geral | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}}
 
 		<div class="form-group row">
 			<label for="inputEmail3" class="col-sm-1 col-form-label">Data</label>
-			<div class="col-sm-2">
-				<input type="date" class="form-control-sm" name="data">
+			<div class="col-sm-4">
+				<input type="date" class="form-control-sm" name="dataInicio"> até <input type="date" class="form-control-sm" name="dataFim"> 
 			</div>
 		
 
@@ -189,6 +189,7 @@ Resultado geral | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}}
 		$(document).ready( function () {
 			$('#table').DataTable({
 
+				"order": [[ 1, "desc" ]],
 
 				dom: 'Bfrtip',
 				buttons: [
