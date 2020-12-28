@@ -36,20 +36,21 @@ Route::get('/emplacamentos/criar', 'ServicosController@createEmplacamento')->nam
 Route::get('/emplacamentos/{id}', 'ServicosController@editEmplacamento')->name('editarEmplacamento');
 
 
-//Salvar e atualizar ambos
+//Salvar, atualizar e deletar ambos
 Route::post('/servicos/atualizar', 'ServicosController@update');
 Route::post('/servicos/armazenar', 'ServicosController@store');
 Route::delete('/servicos/deletar/{servico}/{id}', 'ServicosController@destroy');
 
 
-
-
+//filtros
 Route::get('/live_search', 'ClientesController@action')->name('live_search.action');
 Route::post('/servicos/filterUsados', 'ServicosController@filterUsados');
+Route::post('/servicos/filterEmplacamentos', 'ServicosController@filterEmplacamentos');
 
 
 
-
+Route::get('/geral', 'ServicosController@index')->name('listarServicos');
+Route::post('/geral/filtrar', 'ServicosController@filterGeral');
 
 
 
@@ -63,8 +64,7 @@ Route::delete('/servicos/remover/{id}', 'ServicosController@destroy');
 Route::post('/servicos/filtrar', 'ServicosController@filter');
 
 
-Route::get('/geral', 'ServicosController@index')->name('listarServicos');
-Route::post('/geral/filtrar', 'ServicosController@filter');
+
 
 
 

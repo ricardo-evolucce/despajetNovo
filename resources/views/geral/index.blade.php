@@ -1,7 +1,13 @@
 @extends('layout')
 
 @section('cabecalho')
-Resultado geral | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}} 
+Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}} 
+
+	@if(!empty($dataFim))
+		{{\Carbon\Carbon::parse($dataInicio)->format('d/m/Y')}} até {{\Carbon\Carbon::parse($dataFim)->format('d/m/Y')}}
+	@else
+		{{\Carbon\Carbon::now()->format('d/m/Y')}}
+	@endif
 @endsection
 
 
@@ -16,9 +22,9 @@ Resultado geral | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}}
 			<label for="inputEmail3" class="col-sm-1 col-form-label">Lojas</label>
 			<div class="col-sm-2">
 				<select class="form-control-sm" name="loja_id">
-					<option value="1">Gravatai</option>
-					<option value="2">Taquara</option>
-					<option value="3">Sertório</option>
+					@foreach ($lojas as $loja)
+						<option value="{{$loja->id}}">{{$loja->nome}}</option>
+					@endforeach
 				</select>
 			</div>
 
@@ -28,7 +34,7 @@ Resultado geral | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}}
 			<label for="inputEmail3" class="col-sm-1 col-form-label">Serviço</label>
 			<div class="col-sm-2">
 				<select class="form-control-sm" name="servico">
-					<option value="">Ambos</option>
+					<option value="%">Ambos</option>
 					<option value="U">Usado</option>
 					<option value="E">Emplacamentos</option>
 				</select>
@@ -135,7 +141,8 @@ Resultado geral | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}}
 				<td  @if($servico->provisorioPago==0) class="text-danger" @endif>{{$servico->valorProvisorio}}</td>
 				<td  @if($servico->placaEspPago==0) class="text-danger" @endif>{{$servico->valorPlacaEsp}}</td>				
 				<td  @if($servico->outrosPago==0) class="text-danger" @endif>{{$servico->valorOutros}}</td>		
-				<td></td>
+				<td>{{$servico->valorGuia + $servico->valorIpva + $servico->valorProvisorio + $servico->valorPlacaEsp + $servico->valorOutros + $servico->valorServico}}
+				</td>
 			</tr>
 			@endforeach
 
@@ -179,6 +186,7 @@ Resultado geral | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}}
 			</th><th>
 			</th>
 			<th>
+			</th><th>
 			</th></tfoot>
 		</table>
 	</div>
@@ -209,19 +217,52 @@ Resultado geral | {{ \Carbon\Carbon::parse($data)->format('d/m/Y')}}
 				{ data: "placa" },
 				{ data: "renavam" },
 				{ data: "loja" },
-				{ data: "guia" },
-				{ data: "ipva" },
-				{ data: "provisorio" },
+				{ data: "guia" , render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+				{ data: "ipva" , render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+				{ data: "provisorio" , render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
 				{ data: "placa esp" , render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
 				{ data: "outros",  render: $.fn.dataTable.render.number( '.', ',', 2, '' ) },
-				{ data: "total" },
+				{ data: "total" , render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
 
 				], 
 
 
 
 
+"footerCallback": function ( row, data, start, end, display ) {
+            var api = this.api(), data;
+ 
+            // Remove the formatting to get integer data for summation
+            var intVal = function ( i ) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '')*1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+ 
+            // Total over all pages
+            total = api
+                .column( 14 )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
+ 
+            // Total over this page
+            pageTotal = api
+                .column( 14, { page: 'current'} )
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0 );
 
+
+ 
+            // Update footer
+            $( api.column( 14 ).footer() ).html(
+                pageTotal
+            );
+        }
 
 
 

@@ -53,12 +53,12 @@
             <a class="nav-link" href="/emplacamentos">Listar emplacamentos</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/clientes/criar">Criar cliente</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/clientes">Clientes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/clientes/criar">Criar cliente</a>
-          </li>
-            <li class="nav-item">
             <a class="nav-link" href="/geral">Geral</a>
           </li>
 

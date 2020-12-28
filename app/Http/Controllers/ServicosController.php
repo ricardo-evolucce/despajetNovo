@@ -116,19 +116,53 @@ public function editEmplacamento(Request $request)
 
 
 
-public function filter(Request $request){
+public function filterGeral(Request $request){
 
-    //$servicos = Servico::where('loja_id', $request->get('loja_id'))
-    $servicos = Servico::whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))      
-    ->where('servico', 'LIKE', $request->servico)
-    ->orderBy('data', 'DESC')
-    ->get();
+    
+
+    switch ($request->servico) {
+
+        //caso USADOS
+        case 'U':
+        $servicos = Servico::where('servico', 'U')
+        ->where('loja_id', $request->loja_id)
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->orderBy('data', 'DESC')
+        ->get();
+        break;   
+
+        //caso EMPLACAMENTOS
+        case 'E':
+        $servicos = Servico::where('servico', 'E')
+        ->where('loja_id', $request->loja_id)
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->orderBy('data', 'DESC')
+        ->get();
+        break;
+
+        //caso pagamento PAGOS
+        case '%':
+        $servicos = Servico::where('loja_id', $request->loja_id)
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->orderBy('data', 'DESC')
+        ->get();
+        break;
+
+        default:
+                
+        break;
+    }
+
+    $dataInicio = $request->dataInicio;
+
+    $dataFim = $request->dataFim;   
+
+    $loja = Loja::find($request->loja_id);
 
     $lojas = Loja::all();
 
-    $data = '';    	
+    return view('geral.index', compact('servicos','dataInicio', 'dataFim', 'loja', 'lojas'));
 
-    return view('geral.index', compact('servicos', 'data', 'lojas'));
 
 }
 
@@ -139,7 +173,7 @@ public function filterUsados(Request $request){
 
     switch ($request->pagamentos) {
 
-            //caso pagamento AMBOS
+        //caso pagamento AMBOS
         case '%':
         $usados = Servico::where('servico', 'U')
         ->where('loja_id', $request->loja_id)
@@ -149,7 +183,7 @@ public function filterUsados(Request $request){
         ->get();
         break;   
 
-            //caso pagamento PAGOS
+        //caso pagamento PAGOS
         case '1':
         $usados = Servico::where('servico', 'U')
         ->where('loja_id', $request->loja_id)
@@ -163,7 +197,7 @@ public function filterUsados(Request $request){
 
         break;
 
-            //caso pagamento NÃO PAGOS
+        //caso pagamento NÃO PAGOS
         case '2':
         $usados = Servico::where('servico', 'U')
         ->where('loja_id', $request->loja_id)
@@ -177,11 +211,10 @@ public function filterUsados(Request $request){
         ->get();
 
 
-
         break;
 
         default:
-                # code...
+                
         break;
     }
 
@@ -207,6 +240,74 @@ public function filterUsados(Request $request){
 
 
 
+public function filterEmplacamentos(Request $request){
+
+    switch ($request->pagamentos) {
+
+        //caso pagamento AMBOS
+        case '%':
+        $emplacamentos = Servico::where('servico', 'E')
+        ->where('loja_id', $request->loja_id)       
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->orderBy('data', 'DESC')
+        ->get();
+        break;   
+
+        //caso pagamento PAGOS
+        case '1':
+        $emplacamentos = Servico::where('servico', 'E')
+        ->where('loja_id', $request->loja_id)
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->where('guiaPago', '1')
+        ->where('ipvaPago', '1')
+        ->where('placaEspPago', '1')
+        ->where('provisorioPago', '1')
+        ->where('outrosPago', '1')
+        ->orderBy('data', 'DESC')
+        ->get();
+
+        break;
+
+        //caso pagamento NÃO PAGOS
+        case '2':
+        $emplacamentos = Servico::where('servico', 'E')
+        ->where('loja_id', $request->loja_id)
+        ->where('tiposervico_id', $request->tiposervico_id)
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->where(function ($query) {  
+        $query->where('guiaPago', 'LIKE', '0')
+         ->orWhere('ipvaPago', 'LIKE', '0')
+         ->orWhere('outrosPago', 'LIKE', '0')
+         ->orWhere('provisorioPago', 'LIKE', '0')
+         ->orWhere('placaEspPago', 'LIKE', '0');
+        })
+        ->get();
+
+
+        break;
+
+        default:
+                
+        break;
+    }
+
+   
+
+    $pagamento = $request->pagamentos;
+
+    $dataInicio = $request->dataInicio;
+
+    $dataFim = $request->dataFim;
+
+    
+
+    $loja = Loja::find($request->loja_id);
+
+    $lojas = Loja::all();
+
+    return view('emplacamentos.index', compact('emplacamentos', 'pagamento', 'dataInicio', 'dataFim', 'loja', 'lojas'));
+
+}
 
 
 
