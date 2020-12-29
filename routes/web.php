@@ -54,8 +54,6 @@ Route::post('/geral/filtrar', 'ServicosController@filterGeral');
 
 
 
-Route::post('/usados/filtrar', 'UsadosController@filter');
-Route::post('/servicos/filtrar', 'EmplacamentosController@filter');
 
 
 
