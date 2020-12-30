@@ -5,7 +5,7 @@ Cadastrar cliente
 @endsection
 
 @section('conteudo')
-<form method="post" action="/clientes/cadastrar">
+<form method="post" action="/clientes/armazenar">
 	@csrf
 	<h6>Dados do cliente</h6>
 		<div class="row border-top pb-5">
