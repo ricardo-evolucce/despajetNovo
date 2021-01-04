@@ -88,6 +88,15 @@ Cadastrar serviço de usado
 					<option value="1">Sim</option>
 				</select>
 			</div>
+
+			<div class="col col-6">
+				<label for="carhouseOuCliente">CarHouse / Cliente</label>
+				<select name="carhouseOuCliente" id="carhouseOuCliente" class="form-control">
+					<option value=""></option>
+					<option value="1">CarHouse</option>
+					<option value="2">Cliente</option>
+				</select>
+			</div>
 			
 		</div>
 

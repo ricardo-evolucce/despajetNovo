@@ -92,8 +92,39 @@ Editar serviço de usado
 					@switch($usado->trocaPlaca)
 						@case(1)
 						<option value="1">Sim</option>
+						<option value="0">Não</option>
+						@break
 						@case(0)
 						<option value="0">Não</option>
+						<option value="1">Sim</option>
+						@break
+					@endswitch
+
+					
+					
+				</select>
+			</div>
+
+			<div class="col col-6">
+				<label for="carhouseOuCliente">CarHouse / Cliente</label>
+				<select name="carhouseOuCliente" id="carhouseOuCliente" class="form-control" value="{{$usado->carhouseOuCliente}}">
+
+					@switch($usado->carhouseOuCliente)
+						@case(1)
+						<option value="1">CarHouse</option>
+						<option value="2">Cliente</option>
+						<option value=""></option>
+						@break
+						@case(2)
+						<option value="2">Cliente</option>
+						<option value="1">CarHouse</option>
+						<option value=""></option>
+						@break
+						@default
+						<option value=""></option>
+						<option value="1">CarHouse</option>
+						<option value="2">Cliente</option>
+						@break
 					@endswitch
 
 					
@@ -122,9 +153,11 @@ Editar serviço de usado
 								@case(1)
 								<option value="1">Pago</option>
 								<option value="0">Não pago</option>
+								@break
 								@case(0)
 								<option value="0">Não pago</option>
 								<option value="1">Pago</option>
+								@break
 							@endswitch
 					</select>
 				</span>
@@ -138,9 +171,11 @@ Editar serviço de usado
 								@case(1)
 								<option value="1">Pago</option>
 								<option value="0">Não pago</option>
+								@break
 								@case(0)
 								<option value="0">Não pago</option>
 								<option value="1">Pago</option>
+								@break
 						@endswitch
 					</select>
 				</span>
@@ -157,9 +192,11 @@ Editar serviço de usado
 								@case(1)
 								<option value="1">Pago</option>
 								<option value="0">Não pago</option>
+								@break
 								@case(0)
 								<option value="0">Não pago</option>
 								<option value="1">Pago</option>
+								@break
 						@endswitch
 					</select>
 				</span>

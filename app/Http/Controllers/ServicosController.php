@@ -379,6 +379,8 @@ public function update(Request $request)
     $servico->chassi = $request->chassi;       
     $servico->loja_id = $request->loja_id;
     $servico->numeroPedido = $request->numeroPedido;
+    $servico->trocaPlaca = $request->trocaPlaca;
+    $servico->carhouseOuCliente = $request->carhouseOuCliente;
     $servico->valorGuia = $request->valorGuia;
     $servico->guiaPago = $request->guiaPago;        
     $servico->valorIpva = $request->valorIpva;

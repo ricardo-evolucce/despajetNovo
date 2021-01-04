@@ -26,7 +26,8 @@ class CreateServicosTable extends Migration
             $table->string('renavam', 11)->nullable();
             $table->string('chassi', 17)->nullable();
             $table->string('modelo', 30)->nullable();
-            $table->unsignedBigInteger('trocaPlaca')->nullable();            
+            $table->unsignedBigInteger('trocaPlaca')->nullable();
+            $table->unsignedBigInteger('carhouseOuCliente')->nullable();            
             $table->decimal('valorServico', 15,2)->nullable();
             $table->unsignedBigInteger('servicoPago')->nullable();           
             $table->unsignedBigInteger('ipvaPago')->nullable();
