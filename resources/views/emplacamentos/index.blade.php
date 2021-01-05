@@ -199,6 +199,9 @@ Relatório geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
         $('#table').DataTable({
         	
 
+        "paging": false,
+
+        
             dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'print'

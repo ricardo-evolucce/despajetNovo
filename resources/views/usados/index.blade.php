@@ -237,6 +237,7 @@ Serviços de {{$tipoServico = $tipoServico->nome ?? 'usados'}} | LOJA: {{$lojaNo
     $(document).ready( function () {
         $('#table').DataTable({
         	
+        "paging": false,
 
             dom: 'Bfrtip',
         buttons: [
