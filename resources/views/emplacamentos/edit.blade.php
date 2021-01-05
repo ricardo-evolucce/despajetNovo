@@ -59,7 +59,7 @@ Editar serviço de emplacamento
 
 			<div class="col col-6">
 				<label for="chassi">Chassi</label>
-				<input type="text" name="chassi" id="chassi" class="form-control" value="{{$emplacamento->chassi}}">
+				<input type="text" name="chassi" id="chassi" class="form-control" value="{{$emplacamento->chassi}}" maxlength="17">
 			</div>
 			<div class="col col-6">
 				<label for="modelo">NFE</label>

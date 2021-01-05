@@ -57,7 +57,7 @@ Criar serviço de emplacamento
 
 			<div class="col col-6">
 				<label for="chassi">Chassi</label>
-				<input type="text" name="chassi" id="chassi" class="form-control">
+				<input type="text" name="chassi" id="chassi" class="form-control" maxlength="17">
 			</div>
 			<div class="col col-6">
 				<label for="modelo">NFE</label>
