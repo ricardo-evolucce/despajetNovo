@@ -51,7 +51,7 @@ Editar serviço de emplacamento
 			</div>
 			<div class="col col-6">
 				<label for="data">Data</label>
-				<input type="date" name="data" id="data" class="form-control" value="{{$emplacamento->data->format('Y-m-d')}}">
+				<input type="date" name="data" id="data" class="form-control" value="{{$emplacamento->data->format('Y-m-d')}}" required>
 			</div>
 		</div>
 

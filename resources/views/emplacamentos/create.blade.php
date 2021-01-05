@@ -49,7 +49,7 @@ Criar serviço de emplacamento
 			</div>
 			<div class="col col-6">
 				<label for="data">Data</label>
-				<input type="date" name="data" id="data" class="form-control">
+				<input type="date" name="data" id="data" class="form-control" required>
 			</div>
 		</div>
 
