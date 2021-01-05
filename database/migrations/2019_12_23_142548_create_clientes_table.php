@@ -15,7 +15,7 @@ class CreateClientesTable extends Migration
     {
          Schema::create('clientes', function(Blueprint $table){
             $table->bigIncrements('id');
-            $table->string('cpf', 11)->unique();
+            $table->string('cpf', 14)->unique();
             $table->string('rg', 10)->unique();
             $table->string('endereco', 100);
             $table->string('cidade', 30);
@@ -28,7 +28,7 @@ class CreateClientesTable extends Migration
             $table->string('cep', 8);
             $table->string('numero', 6);
             $table->string('complemento')->nullable();
-            $table->string('cnpj', 15)->nullable();
+            
         });
     }
 

@@ -19,7 +19,7 @@ Cadastrar cliente
 			</div>
 
 			<div class="col col-6">
-				<label for="cpf">CPF</label>
+				<label for="cpf">CPF / CNPJ</label>
 				<input type="type" name="cpf" id="search" class="form-control" >
 
 				<input type="hidden" name="cliente_id" id="cliente_id">
@@ -34,10 +34,10 @@ Cadastrar cliente
 				<label for="rg">RG</label>
 				<input type="text" name="rg" id="rg" class="form-control" >
 			</div>
-			<div class="col col-6">
+			<!--<div class="col col-6">
 				<label for="cnpj">CNPJ</label>
 				<input type="text" name="cnpj" id="cnpj" class="form-control" >
-			</div>
+			</div>-->
 		</div>
 
 
