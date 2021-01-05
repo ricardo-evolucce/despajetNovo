@@ -201,7 +201,7 @@ Relatório geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 
         "paging": false,
 
-        
+
             dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'print'
@@ -261,9 +261,11 @@ Relatório geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 
 
  
+              var numFormat = $.fn.dataTable.render.number( '.', ',', 2 ).display;
+ 
             // Update footer
             $( api.column( 14 ).footer() ).html(
-                pageTotal
+                numFormat(pageTotal)
             );
         }
 

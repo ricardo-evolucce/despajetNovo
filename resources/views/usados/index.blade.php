@@ -296,10 +296,11 @@ Serviços de {{$tipoServico = $tipoServico->nome ?? 'usados'}} | LOJA: {{$lojaNo
                 }, 0 );
 
 
+            var numFormat = $.fn.dataTable.render.number( '.', ',', 2 ).display;
  
             // Update footer
             $( api.column( 12 ).footer() ).html(
-                pageTotal
+                numFormat(pageTotal)
             );
         }
   
