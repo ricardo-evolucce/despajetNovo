@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> 
 
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/plug-ins/1.10.21/api/sum().js"></script>
 
@@ -27,6 +28,8 @@
 
 </head>
 <body>
+
+
   <div class="container-fluid">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-center">
@@ -66,8 +69,6 @@
       </div>
     </div>
   </nav>
-
-
 
 
 

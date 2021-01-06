@@ -15,6 +15,7 @@ class CreateLojasTable extends Migration
     {
         Schema::create('lojas', function (Blueprint $table) {
             $table->id();
+            $table->integer('posicao');
             $table->string('nome', 100);
             $table->string('razaoSocial', 100);
             $table->unsignedBigInteger('cnpj');
