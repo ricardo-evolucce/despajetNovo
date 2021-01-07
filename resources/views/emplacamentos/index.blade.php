@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-Relatório geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
+Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 
 |
 
