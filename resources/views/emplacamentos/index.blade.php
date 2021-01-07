@@ -205,7 +205,7 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 
             dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'print'
+            'excel', 'print'
         ], 
 
 

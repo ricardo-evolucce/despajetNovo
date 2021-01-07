@@ -242,7 +242,7 @@ Serviços de {{$tipoServico = $tipoServico->nome ?? 'usados'}} | LOJA: {{$lojaNo
 
             dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'print'
+            'excel', 'print'
         ], 
 
 
