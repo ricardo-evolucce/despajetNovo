@@ -176,7 +176,7 @@ public function filterUsados(Request $request){
         //caso pagamento AMBOS
         case '%':
         $usados = Servico::where('servico', 'U')
-        ->where('loja_id', $request->loja_id)
+        ->where('loja_id', 'LIKE', $request->loja_id)
         ->where('tiposervico_id', $request->tiposervico_id)      
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->orderBy('data', 'DESC')
@@ -186,7 +186,7 @@ public function filterUsados(Request $request){
         //caso pagamento PAGOS
         case '1':
         $usados = Servico::where('servico', 'U')
-        ->where('loja_id', $request->loja_id)
+        ->where('loja_id', 'LIKE', $request->loja_id)
         ->where('tiposervico_id', $request->tiposervico_id)      
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->where('servicoPago', '1')
@@ -200,7 +200,7 @@ public function filterUsados(Request $request){
         //caso pagamento NÃO PAGOS
         case '2':
         $usados = Servico::where('servico', 'U')
-        ->where('loja_id', $request->loja_id)
+        ->where('loja_id', 'LIKE', $request->loja_id)
         ->where('tiposervico_id', $request->tiposervico_id)
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->where(function ($query) {  
@@ -247,7 +247,7 @@ public function filterEmplacamentos(Request $request){
         //caso pagamento AMBOS
         case '%':
         $emplacamentos = Servico::where('servico', 'E')
-        ->where('loja_id', $request->loja_id)       
+        ->where('loja_id', 'LIKE', $request->loja_id)       
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->orderBy('data', 'DESC')
         ->get();
@@ -256,7 +256,7 @@ public function filterEmplacamentos(Request $request){
         //caso pagamento PAGOS
         case '1':
         $emplacamentos = Servico::where('servico', 'E')
-        ->where('loja_id', $request->loja_id)
+        ->where('loja_id', 'LIKE', $request->loja_id)
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->where('guiaPago', '1')
         ->where('ipvaPago', '1')
@@ -271,7 +271,7 @@ public function filterEmplacamentos(Request $request){
         //caso pagamento NÃO PAGOS
         case '2':
         $emplacamentos = Servico::where('servico', 'E')
-        ->where('loja_id', $request->loja_id)
+        ->where('loja_id', 'LIKE', $request->loja_id)
         ->where('tiposervico_id', $request->tiposervico_id)
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->where(function ($query) {  

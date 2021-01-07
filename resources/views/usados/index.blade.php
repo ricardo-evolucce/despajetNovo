@@ -47,6 +47,7 @@ Serviços de {{$tipoServico = $tipoServico->nome ?? 'usados'}} | LOJA: {{$lojaNo
     <label for="inputEmail3" class="col-sm-1 col-form-label">Loja</label>
     <div class="col-sm-2">
       <select class="form-control-sm" name="loja_id">
+      	<option value="%">TODAS</option>
       	@foreach($lojas as $loja)
 	      	<option value="{{$loja->id}}">{{$loja->nome}}</option>
 	    @endforeach
