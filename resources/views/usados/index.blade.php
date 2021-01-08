@@ -73,7 +73,7 @@ Serviços de {{$tipoServico = $tipoServico->nome ?? 'usados'}} | LOJA: {{$lojaNo
     <div class="col-sm-2">
 		<input type="date" class="form-control-sm" name="dataInicio">
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
 		até <input type="date" class="form-control-sm" name="dataFim">
     </div>
      
