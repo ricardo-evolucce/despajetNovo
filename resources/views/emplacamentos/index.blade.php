@@ -131,7 +131,7 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 		</thead>
 		<tbody>
 			@foreach($emplacamentos as $emplacamento)
-				<tr><td>{{$emplacamento->id}}</td>
+				<tr><td>{{$loop->iteration}}</td>
 					<td>{{$emplacamento->data->format('d/m/Y')}}</td>
 					<td>{{$emplacamento->numeroPedido}}</td>
 					<td><a href="{{route('editarEmplacamento', $emplacamento->id)}}">{{$emplacamento->cliente->nome}}</a></td>

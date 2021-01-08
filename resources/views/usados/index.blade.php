@@ -154,8 +154,9 @@ Serviços de {{$tipoServico = $tipoServico->nome ?? 'usados'}} | LOJA: {{$lojaNo
 			</tr>
 		</thead>
 		<tbody>
+			
 			@foreach($usados as $usado)
-				<tr><td>{{$usado->id}}</td>
+				<tr><td>{{$loop->iteration}}</td>
 					<td>{{$usado->data->format('d/m/Y')}}</td>
 					<td><a href="{{route('editarUsado', $usado->id)}}">{{$usado->cliente->nome}}</a></td>
 					<td>{{$usado->modelo}}</td>
