@@ -14,7 +14,7 @@ Cadastrar serviço de usado
 		<div class="row border-top pb-5">
 			<div class="col col-6">
 				<label for="nome">Nome</label>
-				<input type="type" name="nome" id="nome" class="form-control">
+				<input type="type" name="nome" id="nome" class="form-control" style=" text-transform: uppercase;">
 
 				
 			</div>

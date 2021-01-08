@@ -10,6 +10,29 @@ use App\Tiposervico;
 class Servico extends Model
 {
 	
+	public function setChassiAttribute($value)
+    {
+        $this->attributes['chassi'] = strtoupper($value);
+    }
+
+    public function setModeloAttribute($value)
+    {
+        $this->attributes['modelo'] = strtoupper($value);
+    }
+
+    public function setPlacaAttribute($value)
+    {
+        $this->attributes['placa'] = strtoupper($value);
+    }
+
+    public function setRenavamAttribute($value)
+    {
+        $this->attributes['renavam'] = strtoupper($value);
+    }
+
+
+
+
 	public $timestamps = false;
 
 	protected $dates = ['data'];
