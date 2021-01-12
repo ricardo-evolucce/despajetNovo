@@ -22,10 +22,12 @@ class CreateServicosTable extends Migration
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->unsignedBigInteger('loja_id')->nullable();   
             $table->unsignedBigInteger('numeroPedido')->nullable();
+            $table->unsignedBigInteger('nfe')->nullable();
             $table->string('placa', 8)->nullable();
             $table->string('renavam', 11)->nullable();
             $table->string('chassi', 17)->nullable();
             $table->string('modelo', 30)->nullable();
+
             $table->unsignedBigInteger('trocaPlaca')->nullable();
             $table->unsignedBigInteger('carhouseOuCliente')->nullable();            
             $table->decimal('valorServico', 15,2)->nullable();
@@ -39,8 +41,7 @@ class CreateServicosTable extends Migration
             $table->decimal('valorProvisorio',15,2)->nullable();
             $table->unsignedBigInteger('provisorioPago')->nullable();            
             $table->unsignedBigInteger('outrosPago')->nullable();
-            $table->decimal('valorOutros',15,2)->nullable();
-            
+            $table->decimal('valorOutros',15,2)->nullable();            
             $table->decimal('valorNfe',15,2)->nullable();
             $table->unsignedBigInteger('nfe_id')->nullable();
             $table->timestamps();
