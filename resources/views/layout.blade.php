@@ -40,29 +40,38 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+         
+   
+
+          <li class="nav-item dropdown">
+          	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Clientes
+          	</a>
+          	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          		<a class="dropdown-item" href="/clientes/criar">Adicionar</a>
+          		<a class="dropdown-item" href="/clientes">Consultar</a>
+          	</div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/usados/criar">Criar usado</a>
+
+          <li class="nav-item dropdown">
+          	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Serviços
+          	</a>
+          	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          		<a class="dropdown-item" href="/emplacamentos/criar">Emplacamentos</a>
+          		<a class="dropdown-item" href="/usados/criar">Usados</a>
+          	</div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/usados">Listar usados</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/emplacamentos/criar">Criar emplacamento</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/emplacamentos">Listar emplacamentos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/clientes/criar">Criar cliente</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/clientes">Clientes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/geral">Geral</a>
+
+          <li class="nav-item dropdown">
+          	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          		Consulta
+          	</a>
+          	<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          		<a class="dropdown-item" href="/emplacamentos">Emplacamentos</a>
+          		<a class="dropdown-item" href="/usados">Usados</a>
+          		<a class="dropdown-item" href="/geral">Resultado geral</a>
+          	</div>
           </li>
 
         </ul>
