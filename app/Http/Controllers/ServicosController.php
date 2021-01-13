@@ -177,7 +177,7 @@ public function filterUsados(Request $request){
         case '%':
         $usados = Servico::where('servico', 'U')
         ->where('loja_id', 'LIKE', $request->loja_id)
-        ->where('tiposervico_id', $request->tiposervico_id)      
+        ->where('tiposervico_id', 'LIKE', $request->tiposervico_id)      
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->orderBy('data', 'DESC')
         ->get();
@@ -187,7 +187,7 @@ public function filterUsados(Request $request){
         case '1':
         $usados = Servico::where('servico', 'U')
         ->where('loja_id', 'LIKE', $request->loja_id)
-        ->where('tiposervico_id', $request->tiposervico_id)      
+        ->where('tiposervico_id', 'LIKE', $request->tiposervico_id)      
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->where('servicoPago', '1')
         ->where('ipvaPago', '1')
@@ -201,7 +201,7 @@ public function filterUsados(Request $request){
         case '2':
         $usados = Servico::where('servico', 'U')
         ->where('loja_id', 'LIKE', $request->loja_id)
-        ->where('tiposervico_id', $request->tiposervico_id)
+        ->where('tiposervico_id', 'LIKE', $request->tiposervico_id)
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->where(function ($query) {  
         $query->where('servicoPago', 'LIKE', '0')
