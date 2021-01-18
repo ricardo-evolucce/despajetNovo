@@ -149,7 +149,7 @@ Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 		</thead>
 		<tbody>
 			@foreach($servicos as $servico)
-			<tr><td>{{$servico->id}}</td>
+			<tr><td>{{$loop->iteration}}</td>
 				<td>{{$servico->data->format('d/m/Y')}}</td>			
 				<td>{{$servico->cliente->nome}}</td>
 				<td>{{$servico->modelo}}</td>

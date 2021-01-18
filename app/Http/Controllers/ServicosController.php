@@ -125,7 +125,7 @@ public function filterGeral(Request $request){
         //caso USADOS
         case 'U':
         $servicos = Servico::where('servico', 'U')
-        ->where('loja_id', $request->loja_id)
+        ->where('loja_id', 'LIKE', $request->loja_id)
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->orderBy('data', 'DESC')
         ->get();
@@ -134,7 +134,7 @@ public function filterGeral(Request $request){
         //caso EMPLACAMENTOS
         case 'E':
         $servicos = Servico::where('servico', 'E')
-        ->where('loja_id', $request->loja_id)
+        ->where('loja_id', 'LIKE', $request->loja_id)
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->orderBy('data', 'DESC')
         ->get();
@@ -142,8 +142,8 @@ public function filterGeral(Request $request){
 
         //caso pagamento PAGOS
         case '%':
-        $servicos = Servico::where('loja_id', $request->loja_id)
-        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        $servicos = Servico::whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->where('loja_id', 'LIKE', $request->loja_id)
         ->orderBy('data', 'DESC')
         ->get();
         break;
