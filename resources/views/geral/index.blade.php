@@ -22,6 +22,10 @@ Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 			<label for="inputEmail3" class="col-sm-1 col-form-label">Lojas</label>
 			<div class="col-sm-2">
 				<select class="form-control-sm" name="loja_id">
+					@if(!empty($loja))
+					<option value="{{$loja->id}}">{{$loja->nome}}</option>
+		@endif
+      	<option value="%">TODAS</option>
 					@foreach ($lojas as $loja)
 						<option value="{{$loja->id}}">{{$loja->nome}}</option>
 					@endforeach
@@ -34,6 +38,24 @@ Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 			<label for="inputEmail3" class="col-sm-1 col-form-label">Serviço</label>
 			<div class="col-sm-2">
 				<select class="form-control-sm" name="servico">
+
+					@if(!empty($tiposervico))
+					@switch($tiposervico)
+						@case('%')
+						<option value="%">Ambos</option>
+						@break
+						@case('E')
+						<option value="E">Emplacamentos</option>
+						@break
+						@case('U')
+						<option value="U">Usados</option>
+						@break							
+						@default
+						Erro
+
+					@endswitch
+
+					@endif
 					<option value="%">Ambos</option>
 					<option value="U">Usado</option>
 					<option value="E">Emplacamentos</option>
@@ -45,7 +67,7 @@ Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 		<div class="form-group row">
 			<label for="inputEmail3" class="col-sm-1 col-form-label">Data</label>
 			<div class="col-sm-4">
-				<input type="date" class="form-control-sm" name="dataInicio"> até <input type="date" class="form-control-sm" name="dataFim"> 
+				<input type="date" class="form-control-sm" name="dataInicio" @if(!empty($dataInicio))value="{{$dataInicio}}"@endif> até <input type="date" class="form-control-sm" name="dataFim"  @if(!empty($dataFim))value="{{$dataFim}}"@endif> 
 			</div>
 		
 

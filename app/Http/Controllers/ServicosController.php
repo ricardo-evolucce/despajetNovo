@@ -153,6 +153,8 @@ public function filterGeral(Request $request){
         break;
     }
 
+    $tiposervico = $request->servico;
+
     $dataInicio = $request->dataInicio;
 
     $dataFim = $request->dataFim;   
@@ -161,7 +163,7 @@ public function filterGeral(Request $request){
 
     $lojas = Loja::all();
 
-    return view('geral.index', compact('servicos','dataInicio', 'dataFim', 'loja', 'lojas'));
+    return view('geral.index', compact('servicos', 'tiposervico','dataInicio', 'dataFim', 'loja', 'lojas'));
 
 
 }
