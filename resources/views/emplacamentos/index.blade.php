@@ -24,9 +24,12 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
     <label for="inputEmail3" class="col-sm-1 col-form-label">Loja</label>
     <div class="col-sm-2">
       <select class="form-control-sm" name="loja_id">
-      	<option value="%">TODAS</option>
-      	@foreach ($lojas as $loja)
+      	@if(!empty($loja))
 					<option value="{{$loja->id}}">{{$loja->nome}}</option>
+		@endif
+      	<option value="%">TODAS</option>
+      	@foreach ($lojas as $loj)
+					<option value="{{$loj->id}}">{{$loj->nome}}</option>
 		@endforeach
       </select>
     </div>
@@ -35,23 +38,42 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 
   
     <label for="inputEmail3" class="col-sm-1 col-form-label">Pagamento</label>
-    <div class="col-sm-2">
-      <select class="form-control-sm" name="pagamentos">
-      	<option value="%">Ambos</option>
-      	<option value="1">Pagos</option>
-      	<option value="2">Não pagos</option>
-      </select>
-    </div>
+			<div class="col-sm-2">
+				<select class="form-control-sm" name="pagamentos">
+
+					@if(!empty($pagamento))
+					@switch($pagamento)
+						@case('%')
+						<option value="%">Ambos</option>
+						@break
+						@case(1)
+						<option value="1">Pagos</option>
+						@break
+						@case(2)
+						<option value="2">Não Pagos</option>
+						@break							
+						@default
+						Erro
+
+					@endswitch
+
+					@endif
+
+					<option value="%">Ambos</option>
+					<option value="1">Pagos</option>
+					<option value="2">Não pagos</option>
+				</select>
+			</div>
   </div>
 
 
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-1 col-form-label">Período</label>
     <div class="col-sm-2">
-		<input type="date" class="form-control-sm" name="dataInicio">
+		<input type="date" class="form-control-sm" name="dataInicio" @if(!empty($dataInicio))value="{{$dataInicio}}"@endif>
     </div>
     <div class="col-sm-3">
-		até <input type="date" class="form-control-sm" name="dataFim">
+		até <input type="date" class="form-control-sm" name="dataFim" @if(!empty($dataFim))value="{{$dataFim}}"@endif>
     </div>
      
 
