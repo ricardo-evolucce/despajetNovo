@@ -181,7 +181,7 @@ public function filterUsados(Request $request){
         ->where('loja_id', 'LIKE', $request->loja_id)
         ->where('tiposervico_id', 'LIKE', $request->tiposervico_id)      
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
-        ->orderBy('data', 'DESC')
+        ->orderBy('data', 'ASC')
         ->get();
         break;   
 
@@ -194,7 +194,7 @@ public function filterUsados(Request $request){
         ->where('servicoPago', '1')
         ->where('ipvaPago', '1')
         ->where('outrosPago', '1')
-        ->orderBy('data', 'DESC')
+        ->orderBy('data', 'ASC')
         ->get();
 
         break;
@@ -251,7 +251,7 @@ public function filterEmplacamentos(Request $request){
         $emplacamentos = Servico::where('servico', 'E')
         ->where('loja_id', 'LIKE', $request->loja_id)       
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
-        ->orderBy('data', 'DESC')
+        ->orderBy('data', 'ASC')
         ->get();
         break;   
 
@@ -265,7 +265,7 @@ public function filterEmplacamentos(Request $request){
         ->where('placaEspPago', '1')
         ->where('provisorioPago', '1')
         ->where('outrosPago', '1')
-        ->orderBy('data', 'DESC')
+        ->orderBy('data', 'ASC')
         ->get();
 
         break;
