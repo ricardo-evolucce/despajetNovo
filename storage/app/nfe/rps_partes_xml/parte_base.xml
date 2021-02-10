@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EnviarLoteRpsEnvio xmlns="http://www.e-nfs.com.br">
+  <LoteRps id="array->lote_num">
+      <NumeroLote>array->lote_num</NumeroLote>
+      <Cnpj>19868274000125</Cnpj>
+      <InscricaoMunicipal>6869039</InscricaoMunicipal>
+      <QuantidadeRps>array->rps_quantidade</QuantidadeRps>
+      <ListaRps>
+        array->parte_rps
+      </ListaRps>
+  </LoteRps>
+</EnviarLoteRpsEnvio>

@@ -11,12 +11,11 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 //Clientes
 Route::get('/clientes', 'ClientesController@index');
@@ -35,47 +34,25 @@ Route::get('/emplacamentos', 'ServicosController@indexEmplacamentos')->name('lis
 Route::get('/emplacamentos/criar', 'ServicosController@createEmplacamento')->name('criarEmplacamento');
 Route::get('/emplacamentos/{id}', 'ServicosController@editEmplacamento')->name('editarEmplacamento');
 
-
 //Salvar, atualizar e deletar ambos
 Route::post('/servicos/atualizar', 'ServicosController@update');
 Route::post('/servicos/armazenar', 'ServicosController@store');
 Route::delete('/servicos/deletar/{servico}/{id}', 'ServicosController@destroy');
-
 
 //filtros
 Route::get('/live_search', 'ClientesController@action')->name('live_search.action');
 Route::post('/servicos/filterUsados', 'ServicosController@filterUsados');
 Route::post('/servicos/filterEmplacamentos', 'ServicosController@filterEmplacamentos');
 
-
-
 Route::get('/geral', 'ServicosController@index')->name('listarServicos');
 Route::post('/geral/filtrar', 'ServicosController@filterGeral');
-
-
-
-
-
 
 Route::get('/servicos/{id}', 'ServicosController@edit')->name('editarServico');
 Route::delete('/servicos/remover/{id}', 'ServicosController@destroy');
 Route::post('/servicos/filtrar', 'ServicosController@filter');
 
+Route::post('/servicos/filtrar', 'ServicosController@filter');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Route::get('/nota-fiscal', 'NfeController@index')->name('nota-fiscal.index');
+Route::any('/nota-fiscal/central-acoes', 'NfeController@centraAcoes');
+Route::get('/nota-fiscal/baixar/{ids}', 'NfeController@baixar');
