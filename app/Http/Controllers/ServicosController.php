@@ -52,11 +52,27 @@ class ServicosController extends Controller
 
         $lojas = Loja::all();
 
-        return view('emplacamentos.index', compact('emplacamentos', 'data', 'lojas'));
-    }
+        //caso pagamento AMBOS
+        case '%':
+        $usados = Servico::where('servico', 'U')
+        ->where('loja_id', 'LIKE', $request->loja_id)
+        ->where('tiposervico_id', 'LIKE', $request->tiposervico_id)
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->orderBy('data', 'ASC')
+        ->get();
+        break;
 
-    public function createUsado()
-    {
+        //caso pagamento PAGOS
+        case '1':
+        $usados = Servico::where('servico', 'U')
+        ->where('loja_id', 'LIKE', $request->loja_id)
+        ->where('tiposervico_id', 'LIKE', $request->tiposervico_id)
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->where('servicoPago', '1')
+        ->where('ipvaPago', '1')
+        ->where('outrosPago', '1')
+        ->orderBy('data', 'ASC')
+        ->get();
 
         $lojas = Loja::all();
         $tiposervicos = Tiposervico::all();
@@ -137,9 +153,27 @@ class ServicosController extends Controller
                 break;
         }
 
-        $tiposervico = $request->servico;
+        //caso pagamento AMBOS
+        case '%':
+        $emplacamentos = Servico::where('servico', 'E')
+        ->where('loja_id', 'LIKE', $request->loja_id)
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->orderBy('data', 'ASC')
+        ->get();
+        break;
 
-        $dataInicio = $request->dataInicio;
+        //caso pagamento PAGOS
+        case '1':
+        $emplacamentos = Servico::where('servico', 'E')
+        ->where('loja_id', 'LIKE', $request->loja_id)
+        ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
+        ->where('guiaPago', '1')
+        ->where('ipvaPago', '1')
+        ->where('placaEspPago', '1')
+        ->where('provisorioPago', '1')
+        ->where('outrosPago', '1')
+        ->orderBy('data', 'ASC')
+        ->get();
 
         $dataFim = $request->dataFim;
 
