@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-  <link href="{{ url('') }}/vendor/fontawesome/5.15.2/css/all.css" rel="stylesheet" type="text/css">
-  <link href="{{ url('') }}/css/global.css" rel="stylesheet" type="text/css">
+  <link href="/public/vendor/fontawesome/5.15.2/css/all.css" rel="stylesheet" type="text/css">
+  <link href="/public/css/global.css" rel="stylesheet" type="text/css">
 
 
 
@@ -30,8 +30,8 @@
   <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
   <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
 
-  <script src="{{ url('') }}/vendor/fontawesome/5.15.2/js/all.js" type="text/javascript"></script>
-  <script src="{{ url('') }}/vendor/sweetalert2.min.js" type="text/javascript"></script>
+  <script src="/public/vendor/fontawesome/5.15.2/js/all.js" type="text/javascript"></script>
+  <script src="/public/vendor/sweetalert2.min.js" type="text/javascript"></script>
 
 
 </head>

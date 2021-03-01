@@ -227,7 +227,7 @@ foreach (['error', 'warning', 'success', 'info'] as $key ){
     @endsection
 
 @section('js_custom')
-    <script type="text/javascript" src="{{ url('') }}/js/nfe.js"></script>
+    <script type="text/javascript" src="/public/js/nfe.js"></script>
 @endsection
 
 
