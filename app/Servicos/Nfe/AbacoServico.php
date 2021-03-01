@@ -14,8 +14,8 @@ use SoapClient;
 
 class AbacoServico extends Servico
 {
-    // private const URL = 'https://www.e-nfs.com.br/e-nfs_canoas/servlet'; // producao
-	private const URL = 'https://enfs-hom.abaco.com.br/canoas/servlet'; // teste
+     private const URL = 'https://www.e-nfs.com.br/e-nfs_canoas/servlet'; // producao
+	//private const URL = 'https://enfs-hom.abaco.com.br/canoas/servlet'; // teste
 
 
 	public function gerarNumeroSerie($intevalo_meses = 1, $numero_adicao=1, $serie_adicao=1)
