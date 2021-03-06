@@ -174,7 +174,7 @@ foreach (['error', 'warning', 'success', 'info'] as $key ){
             <tr>
                 <td></td>
                 <td>{{$servico->id}}</td>
-				<td>{{$servico->data->format('d/m/Y')}}</td>
+				<td>{{$servico->DATA->format('d/m/Y')}}</td>
 				<td>{{$servico->cliente->nome}}</td>
 				{{-- <td>{{$servico->modelo}}</td>
 				<td>{{$servico->chassi}}</td> --}}

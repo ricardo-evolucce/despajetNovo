@@ -13,7 +13,7 @@ class VServicosNfe extends Model
 	public $table = 'v_servicos_nfe';
 	public $timestamps = false;
 
-    protected $dates = ['data'];
+    protected $dates = ['DATA'];
 
     public function setChassiAttribute($value)
     {

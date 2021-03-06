@@ -35,17 +35,19 @@ class NfeServico extends AbacoServico
 
 	public function prepararDados(array $tomadores_notas)
 	{
-		foreach ($tomadores_notas as $tomador_id => $notas) {
+        foreach ($tomadores_notas as $tomador_id => $notas) {
             foreach ($notas as $nota_id => $nota) {
                 $nota['valor'] = str_replace(',','.',$nota['valor']);
-                $nota['descricao_servico_completa'] = "{$nota['nfe_descricao_padrao']} = R$ {$nota['valor']}";
-                $nota['tomador_codigo_municipio'] = $this->buscarMunicipioPorCep($nota['tomador_cep'])->ibge;
-
+                if($nota['servico']=='E'){
+                    $nota['descricao_servico_completa'] = "{$nota['nfe_descricao_padrao']} = R$ {$nota['valor']}";
+                } else if($nota['servico']=='U'){
+                    $complemento = ", {$nota['servico_carhouseOuCliente_descricao']}, {$nota['servico_trocaPlaca_descricao']}";
+                    $nota['descricao_servico_completa'] = "{$nota['nfe_descricao_padrao']}$complemento = R$ {$nota['valor']}";
+                }
                 $notas[$nota_id] = $nota;
             }
             $tomadores_notas[$tomador_id] = $notas;
         }
-
 		return $tomadores_notas;
 	}
 
@@ -145,28 +147,28 @@ class NfeServico extends AbacoServico
 		return $nfe;
 	}
 
-	private function buscarMunicipioPorCep($cep)
-	{
+	// private function buscarMunicipioPorCep($cep)
+	// {
 
-		$curl = curl_init();
+	// 	$curl = curl_init();
 
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => "https://viacep.com.br/ws/$cep/json/",
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_TIMEOUT => 30,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => "GET",
-			CURLOPT_HTTPHEADER => array(
-				"cache-control: no-cache"
-			),
-		));
+	// 	curl_setopt_array($curl, array(
+	// 		CURLOPT_URL => "https://viacep.com.br/ws/$cep/json/",
+	// 		CURLOPT_RETURNTRANSFER => true,
+	// 		CURLOPT_TIMEOUT => 30,
+	// 		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+	// 		CURLOPT_CUSTOMREQUEST => "GET",
+	// 		CURLOPT_HTTPHEADER => array(
+	// 			"cache-control: no-cache"
+	// 		),
+	// 	));
 
-		$response = curl_exec($curl);
-		$err = curl_error($curl);
+	// 	$response = curl_exec($curl);
+	// 	$err = curl_error($curl);
 
-		curl_close($curl);
-		return json_decode($response);
-	}
+	// 	curl_close($curl);
+	// 	return json_decode($response);
+	// }
 
 
 }
