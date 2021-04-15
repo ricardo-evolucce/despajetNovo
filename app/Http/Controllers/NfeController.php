@@ -207,7 +207,7 @@ class NfeController extends Controller
             //caso pagamento PAGOS
             case '%':
                 $servicos = VServicosNfe::whereBetween(DB::raw('DATE(data)'), array($dados['dataInicio'], $dados['dataFim']))
-                    // ->where('loja_id', 'LIKE', $dados['loja_id'])
+                    ->where('loja_id', 'LIKE', $dados['loja_id'])
                     ->orderBy('data', 'DESC')
                     ->get();
                 break;
