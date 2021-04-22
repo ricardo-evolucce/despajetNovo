@@ -219,6 +219,8 @@ Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 		$(document).ready( function () {
 			$('#table').DataTable({
 
+				"paging": false,
+
 				"order": [[ 1, "desc" ]],
 
 				dom: 'Bfrtip',
@@ -278,11 +280,12 @@ Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
                     return intVal(a) + intVal(b);
                 }, 0 );
 
+            var numFormat = $.fn.dataTable.render.number( '.', ',', 2 ).display;
 
  
             // Update footer
             $( api.column( 14 ).footer() ).html(
-                pageTotal
+                numFormat(pageTotal)
             );
         }
 
