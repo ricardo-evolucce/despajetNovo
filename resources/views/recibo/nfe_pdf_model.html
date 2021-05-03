@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body{
+      font-size: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    p {
+      height: 7px;
+    }
+    #tabela-nfe td {
+      height: 20px;
+      width: 90px;
+    }
+  </style>
+</head>
+
+<body>
+  <table id="tabela-nfe" border="1" style="margin: 0 auto;">
+    <tbody>
+      <tr>
+        <td>
+            <img src="../images/brasaocanoas.jpg" style="width: 100px;" />
+        </td>
+        <td colspan="7" align="center">
+          <div>
+            <b>MUNICIPIO DE CANOAS</b>
+          </div>
+          <div>
+            Secretaria Municipal da Fazenda
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="2" colspan="4">
+          <p style="font-weight: bolder;">NOTA FISCAL DE SERVIÇOS ELETRÔNICA - NFSe</p>
+          <p>
+            A autenticidade desta nota pode ser confirmada em: <b><a href="https://www.e-nfs.com.br/e-nfs_canoas">https://www.e-nfs.com.br/e-nfs_canoas</a></b>, informando o código de verificação.
+          </p>
+          <br />
+        </td>
+        <td colspan="2">
+          <div> Número da Nota </div>
+          <div> <b>array->nf_num</b> </div>
+        </td>
+        <td colspan="2">
+          <div> Data/Hora da emissão </div>
+          <div> <b>array->DataEmissao</b> </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div> Natureza da operação </div>
+          <div> <b>array->NaturezaOperacao</b> </div>
+        </td>
+        <td colspan="2">
+          <div> Número do RPS </div>
+          <div> <b>array->IdentificacaoRps->Numero</b> </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8" align="center">
+          <b>Prestador de Serviços</b>
+        </td>
+      </tr>
+      <tr>
+        <td><img src="../images/despajet-logo.jpg" style="width: 100px;" /></td>
+        <td colspan="5">
+          <p><b>DESPAJET SERVIÇOS DE DESPACHANTE LTDA - ME</b></p>
+          <p>RUA BOLÍVIA,, 968, SÃO LUIS,  CANOAS - RS - Brasil, Telefone: </p>
+          <p><span>CEP </span> <span>91020001</span></p>
+          <p><span>CPF/CNPJ </span> <span>19.868.274/0001-25</span></p>
+          <p><span>Email </span> <span>ANTONIO@AJPCONTABILIDADE.COM.BR</span></p>
+        </td>
+        <td colspan="2">
+          <p> <span>Inscrição Municipal </span> <span>6869039</span> </p>
+          <p> <span>Inscrição Estadual </span> <span></span> </p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8" align="center">
+          <b>Tomador de Serviço</b>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="6">
+          <p> <span>Nome do tomador do serviço </span> <span>array->Tomador->RazaoSocial</span> </p>
+          <p> <span>CPF/CNPJ </span> <span>array->Tomador->IdentificacaoTomador->CpfCnpj->Cnpj</span> </p>
+          <p> <span>Endereço </span> <span>array->Tomador->Endereco->Endereco, array->Tomador->Endereco->Numero,</span> </p>
+          <p> <span>Bairro </span> <span>array->Tomador->Endereco->Bairro, Telefone: .</span> </p>
+          <p> <span>CEP </span> <span>array->Tomador->Endereco->Cep</span> </p>
+          <p> <span>Cidade </span> <span> array->Tomador->Endereco->Municipio - array->Tomador->Endereco->Uf - Brasil</span> </p>
+          <p> <span>Email </span> <span>array->Tomador->email</span> </p>
+        </td>
+        <td colspan="2">
+          <p> <span>Inscrição Municipal </span> <span></span> </p>
+          <p> <span>Inscrição Estadual </span> <span></span> </p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8" align="center">
+          <b>Discriminação do Serviço/Dados Adicionais</b>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8" style="height: 100px;">
+          <!-- REFERENTE AO SERVIÇO DE EMPLACAMENTO DE VEICULO 0KM, TOYOTA RAV 4 CHASSI LD541359 -->
+          REFERENTE AO SERVIÇO DE array->Servico->Discriminacao
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8">
+          <span>Serviço: </span><span>33.01-SERVIÇOS DE DESEMBARAÇO ADUANEIRO, COMISSÁRIOS, DESPACHANTES E CONGÊNERES</span>
+        </td>
+      </tr>
+      <tr>
+        <td><div>Valor do Serviço (R$)</div><div>array->Servico->Valores->ValorServicos</div></td>
+        <td><div>Qtd.</div><div>1,00</div></td>
+        <td><div>Desconto(R$)</div><div>array->Servico->Valores->DescontoCondicionado</div></td>
+        <td><div>Dedução(R$)</div><div>array->Servico->Valores->ValorDeducoes</div></td>
+        <td><div>Base de Cálculo(R$)</div>array->Servico->Valores->BaseCalculo<div></div></td>
+        <td><div>Aliquota(%)</div><div>array->Servico->Valores->Aliquota</div></td>
+        <td><div>Valor do ISS(R$)</div>array->Servico->Valores->ValorIss<div></div></td>
+        <td><div>Total(R$)</div><div>array->Servico->Valores->ValorLiquidoNfse</div></td>
+      </tr>
+      <tr>
+        <td colspan="8" align="center">
+          <b>VALOR TOTAL DA NOTA = R$ array->Servico->Valores->ValorLiquidoNfse</b>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8" align="center">
+          <b>Retenções</b>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"><div>INSS(R$)<div>array->Servico->Valores->ValorInss</div></td>
+        <td><div>PIS(R$)<div>array->Servico->Valores->ValorPis</div></td>
+        <td colspan="2"><div>Cofins(R$)<div>array->Servico->Valores->ValorCofins</div></td>
+        <td colspan="2"><div>C.S.L.L(R$)<div>array->Servico->Valores->ValorCsll</div></td>
+        <td><div>IRRF(R$)<div>array->Servico->Valores->ValorIr</div></td>
+      </tr>
+      <tr>
+        <td colspan="2"><div>ISSQN(R$)<div>0</div></td>
+        <td colspan="2"><div>Outras Deduções(R$)<div>array->Servico->Valores->OutrasRetencoes</div></td>
+        <td colspan="2"><div>Total das Retenções (R$)<div>0</div></td>
+        <td colspan="2"><div>Valor Líquido da Nota(R$)<div>array->Servico->Valores->ValorLiquidoNfse</div></td>
+      </tr>
+      <tr>
+        <td colspan="8" align="center">
+          <b>Outras Informações</b>
+        </td>
+      </tr>
+      <tr >
+        <td colspan="8" style="height: 100px;">
+          - ISSQN Simples Nacional recolhido em Canoas. NÃO SUJEITO A RETENÇÃO NA FONTE
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

@@ -55,6 +55,8 @@ Route::get('/nota-fiscal', 'NfeController@index')->name('nota-fiscal.index')->mi
 Route::any('/nota-fiscal/central-acoes', 'NfeController@centraAcoes')->middleware('auth');
 Route::get('/nota-fiscal/baixar/{ids}', 'NfeController@baixar')->middleware('auth');
 
+Route::get('/pdfRecibo/{id}', 'PdfReciboController@geraRecibo')->name('pdfRecibo');
+
 
 Route::get('/', function () {
     return view('welcome');

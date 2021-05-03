@@ -147,6 +147,10 @@ $(document).ready(function () {
                     return button;
                 },
             },
+            {
+                data: "recibo"
+                
+            },
         ],
         columnDefs: [
             {
@@ -168,7 +172,7 @@ $(document).ready(function () {
         },
 
         footerCallback: function (row, data, start, end, display) {
-            let col_total = 13;
+            let col_total = 14;
             var api = this.api(),
                 data;
 

@@ -21,9 +21,10 @@ class ServicosController extends Controller
     ->get();
 
     $data = Carbon::today();
-    $lojas = Loja::all();        
+    $lojas = Loja::all();    
+    $lojasSelect = '';  
 
-    return view('geral.index', compact('servicos', 'data', 'lojas'));
+    return view('geral.index', compact('servicos', 'data', 'lojas', 'lojasSelect'));
 }
 
 
@@ -125,7 +126,7 @@ public function filterGeral(Request $request){
         //caso USADOS
         case 'U':
         $servicos = Servico::where('servico', 'U')
-        ->where('loja_id', 'LIKE', $request->loja_id)
+        ->whereIn('loja_id', $request->lojas)
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->orderBy('data', 'DESC')
         ->get();
@@ -134,16 +135,17 @@ public function filterGeral(Request $request){
         //caso EMPLACAMENTOS
         case 'E':
         $servicos = Servico::where('servico', 'E')
-        ->where('loja_id', 'LIKE', $request->loja_id)
+        ->whereIn('loja_id', $request->lojas)
         ->whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
         ->orderBy('data', 'DESC')
         ->get();
         break;
 
         //caso pagamento PAGOS
-        case '%':
+        case '%':   
         $servicos = Servico::whereBetween(DB::raw('DATE(data)'), array($request->dataInicio, $request->dataFim))
-        ->where('loja_id', 'LIKE', $request->loja_id)
+        ->whereIn('loja_id', $request->lojas)
+        //->where('loja_id', 'LIKE', $request->loja_id)
         ->orderBy('data', 'DESC')
         ->get();
         break;
@@ -159,11 +161,13 @@ public function filterGeral(Request $request){
 
     $dataFim = $request->dataFim;   
 
-    $loja = Loja::find($request->loja_id);
+    //$loja = Loja::find($request->loja_id);
 
     $lojas = Loja::all();
 
-    return view('geral.index', compact('servicos', 'tiposervico','dataInicio', 'dataFim', 'loja', 'lojas'));
+    $lojasSelect = Loja::whereIn('id', $request->lojas)->get();
+
+    return view('geral.index', compact('servicos', 'tiposervico','dataInicio', 'dataFim', 'lojasSelect', 'lojas'));
 
 
 }

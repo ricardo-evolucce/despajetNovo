@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}} 
+Resultado geral | LOJAS: @if(!empty($lojasSelect))@foreach($lojasSelect as $loja) {{ $loja->nome }}, @if(empty($lojasSelect)) TODAS.@endif @endforeach @endif
 
 	@if(!empty($dataFim))
 		{{\Carbon\Carbon::parse($dataInicio)->format('d/m/Y')}} até {{\Carbon\Carbon::parse($dataFim)->format('d/m/Y')}}
@@ -13,29 +13,35 @@ Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 
 @section('conteudo')
 
-
+<!--{{$lojaNome = $loja->nome ?? 'Todas'}}-->
 
 <div class="containder-fluid">
 	<form action="/geral/filtrar" method="post">
 		@csrf
 		<div class="form-group row">
-			<label for="inputEmail3" class="col-sm-1 col-form-label">Lojas</label>
-			<div class="col-sm-2">
-				<select class="form-control-sm" name="loja_id">
+			<label for="inputEmail3" class="col-sm-12 col-form-label"><b>Lojas</b></label>
+			<div class="col-sm-12">
+				<!--<select class="form-control-sm" name="loja_id">
 					@if(!empty($loja))
 					<option value="{{$loja->id}}">{{$loja->nome}}</option>
-		@endif
-      	<option value="%">TODAS</option>
-					@foreach ($lojas as $loja)
-						<option value="{{$loja->id}}">{{$loja->nome}}</option>
-					@endforeach
-				</select>
+				@endif-->
+
+				<input type="checkbox" name="lojas[]" class="loja" id="todas"> &nbsp; Todas  &nbsp;
+				@foreach($lojas as $loja)
+				<input type="checkbox" name="lojas[]" class="loja" value="{{$loja->id}}"> &nbsp; {{$loja->nome}}  &nbsp;
+				@endforeach
+				
+
+
+
 			</div>
+		</div>
+
+		<div class="form-group row">
 
 
 
-
-			<label for="inputEmail3" class="col-sm-1 col-form-label">Serviço</label>
+			<label for="inputEmail3" class="col-sm-1 col-form-label"><b>Serviço</b></label>
 			<div class="col-sm-2">
 				<select class="form-control-sm" name="servico">
 
@@ -65,7 +71,7 @@ Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 
 
 		<div class="form-group row">
-			<label for="inputEmail3" class="col-sm-1 col-form-label">Data</label>
+			<label for="inputEmail3" class="col-sm-1 col-form-label"><b>Data</b></label>
 			<div class="col-sm-4">
 				<input type="date" class="form-control-sm" name="dataInicio" @if(!empty($dataInicio))value="{{$dataInicio}}"@endif> até <input type="date" class="form-control-sm" name="dataFim"  @if(!empty($dataFim))value="{{$dataFim}}"@endif> 
 			</div>
@@ -294,6 +300,21 @@ Resultado geral | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 
 
 			} );
+
+
+			$(function() {
+
+    	$('#todas').click(function() {
+        if ($(this).prop('checked')) {
+            $('.loja').prop('checked', true);
+        } else {
+            $('.loja').prop('checked', false);
+        }
+    });
+
+});
+
+
 		} );
 	</script>
 
