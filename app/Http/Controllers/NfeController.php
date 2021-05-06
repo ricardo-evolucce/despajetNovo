@@ -78,6 +78,8 @@ class NfeController extends Controller
                         $nfe_transmitido_array = $this->servico->xml2array($nfe_transmitido);
 
                         $transmitir_erro = $this->servico->pegarErroRetornoWs($nfe_transmitido_array);
+
+                        dd($transmitir_erro);
                         if( ! $transmitir_erro){
                             $lote = $this->servico->consultarNotasPorLote($nfe_transmitido_array['Protocolo']);
                             $lote_array = $this->servico->xml2array($lote);
