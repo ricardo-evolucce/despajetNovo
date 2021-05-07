@@ -54,7 +54,7 @@ class AbacoServico extends Servico
 
 		return [
 			'numero' => $maior_num+$numero_adicao,
-			'serie' => $this->alphanumeric_increment($maior_serie, $position = false);
+			'serie' => $this->alphanumeric_increment($maior_serie, $position = false)
 		];
 	}
 
