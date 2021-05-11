@@ -161,10 +161,10 @@ foreach (['error', 'warning', 'success', 'info'] as $key ){
 					Outros
 				</th>
 				<th scope="col">
-					Total
+					Valor
                 </th>
                 <th scope="col">
-                    NFe
+                    NFe 
                 </th>
                 <!--<th scope="col">
                     Recibo
@@ -190,7 +190,7 @@ foreach (['error', 'warning', 'success', 'info'] as $key ){
 				<td  @if($servico->provisorioPago==0) class="text-danger" @endif>{{$servico->valorProvisorio}}</td>
 				<td  @if($servico->placaEspPago==0) class="text-danger" @endif>{{$servico->valorPlacaEsp}}</td>
 				<td  @if($servico->outrosPago==0) class="text-danger" @endif>{{$servico->valorOutros}}</td>
-                <td>{{$servico->valorGuia + $servico->valorIpva + $servico->valorProvisorio + $servico->valorPlacaEsp + $servico->valorOutros + $servico->valorServico}} </td>
+                <td>{{$servico->valor}}</td>
                 <td>{{$servico->nfe_id}}</td>
                 <!--<td><a href="{{route('pdfRecibo', $servico->id)}}">Recibo</a></td>-->
 			</tr>

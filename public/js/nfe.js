@@ -126,7 +126,7 @@ $(document).ready(function () {
                 render: $.fn.dataTable.render.number(".", ",", 2, ""),
             },
             {
-                data: "total",
+                data: "valor",
                 render: $.fn.dataTable.render.number(".", ",", 2, ""),
             },
             {
@@ -169,7 +169,7 @@ $(document).ready(function () {
         },
 
         footerCallback: function (row, data, start, end, display) {
-            let col_total = 14;
+            let col_total = 13;
             var api = this.api(),
                 data;
 
@@ -198,8 +198,11 @@ $(document).ready(function () {
                     return intVal(a) + intVal(b);
                 }, 0);
 
+            var numFormat = $.fn.dataTable.render.number( '.', ',', 2 ).display;
+
             // Update footer
-            $(api.column(col_total).footer()).html(pageTotal);
+            $(api.column(col_total).footer()).html(
+                numFormat(pageTotal));
         },
     });
 
