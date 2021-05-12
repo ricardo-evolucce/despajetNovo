@@ -95,7 +95,7 @@ $(document).ready(function () {
             url:
                 "http://cdn.datatables.net/plug-ins/1.10.21/i18n/Portuguese-Brasil.json",
         },
-
+        "paging": false,
         columns: [
             { data: "---" },
             { data: "id" },
