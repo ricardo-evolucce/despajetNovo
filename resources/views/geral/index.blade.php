@@ -151,6 +151,9 @@ Resultado geral | LOJAS: @if(!empty($lojasSelect))@foreach($lojasSelect as $loja
 					NF
 				</th>
 				<th scope="col">
+					Placa
+				</th>
+				<th scope="col">
 					Total
 				</th>
 
@@ -173,7 +176,8 @@ Resultado geral | LOJAS: @if(!empty($lojasSelect))@foreach($lojasSelect as $loja
 				<td  @if($servico->placaEspPago==0) class="text-danger" @endif>{{$servico->valorPlacaEsp}}</td>				
 				<td  @if($servico->outrosPago==0) class="text-danger" @endif>{{$servico->valorOutros}}</td>		
 				<td>{{$servico->valorNfe}}</td>
-				<td>{{$servico->valorGuia + $servico->valorIpva + $servico->valorProvisorio + $servico->valorPlacaEsp + $servico->valorOutros + $servico->valorServico + $servico->valorNfe}}
+				<td>{{$servico->valorPlaca}}</td>
+				<td>{{$servico->valorGuia + $servico->valorIpva + $servico->valorProvisorio + $servico->valorPlacaEsp + $servico->valorOutros + $servico->valorServico + $servico->valorNfe + $servico->valorPlaca}}
 				</td>
 			</tr>
 			@endforeach
@@ -182,6 +186,9 @@ Resultado geral | LOJAS: @if(!empty($lojasSelect))@foreach($lojasSelect as $loja
 
 		</tbody>
 		<tfoot><th>
+
+		</th>
+		<th>
 
 		</th>
 		<th>
@@ -258,6 +265,7 @@ Resultado geral | LOJAS: @if(!empty($lojasSelect))@foreach($lojasSelect as $loja
 				{ data: "placa esp" , render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
 				{ data: "outros",  render: $.fn.dataTable.render.number( '.', ',', 2, '' ) },
 				{ data: "nf",  render: $.fn.dataTable.render.number( '.', ',', 2, '' ) },
+				{ data: "valorPlaca",  render: $.fn.dataTable.render.number( '.', ',', 2, '' ) },
 				{ data: "total" , render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
 
 				], 
@@ -278,7 +286,7 @@ Resultado geral | LOJAS: @if(!empty($lojasSelect))@foreach($lojasSelect as $loja
  
             // Total over all pages
             total = api
-                .column( 15 )
+                .column( 16 )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
@@ -286,7 +294,7 @@ Resultado geral | LOJAS: @if(!empty($lojasSelect))@foreach($lojasSelect as $loja
  
             // Total over this page
             pageTotal = api
-                .column( 15, { page: 'current'} )
+                .column( 16, { page: 'current'} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
@@ -296,7 +304,7 @@ Resultado geral | LOJAS: @if(!empty($lojasSelect))@foreach($lojasSelect as $loja
 
  
             // Update footer
-            $( api.column( 15 ).footer() ).html(
+            $( api.column( 16 ).footer() ).html(
                 numFormat(pageTotal)
             );
         }

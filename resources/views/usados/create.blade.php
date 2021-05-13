@@ -154,6 +154,23 @@ Cadastrar serviço de usado
 			
 		</div>
 
+		<div class="row">
+		<div class="col col-6">
+				<label for="valorPlaca">Valor Placa</label>
+				<span class="d-flex">
+					<input type="text" name="valorPlaca" id="valorPlaca" class="form-control mr-2">
+					<select class="form-control" name="placaPago">
+							<option value="1">Pago</option>
+							<option value="0">Não pago</option>
+					</select>
+				</span>
+		</div>
+		</div>
+
+	
+			
+		</div>
+
 
 
 

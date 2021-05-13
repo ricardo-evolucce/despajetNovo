@@ -182,6 +182,9 @@ Pagos e não pagos
 					Outros
 				</th>
 				<th scope="col">
+					Placa
+				</th>
+				<th scope="col">
 					Total
 				</th>
 
@@ -221,10 +224,13 @@ Pagos e não pagos
 				<td @if($usado->outrosPago==0) class="text-danger" @endif>
 					{{$usado->valorOutros}}
 				</td>
+				<td @if($usado->outrosPago==0) class="text-danger" @endif>
+					{{$usado->valorPlaca}}
+				</td>
 				
 
 
-				<td>{{$usado->valorServico + $usado->valorIpva + $usado->valorOutros}}</td>
+				<td>{{$usado->valorServico + $usado->valorIpva + $usado->valorOutros + $usado->valorPlaca}}</td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -251,6 +257,9 @@ Pagos e não pagos
 		</th>
 		<th>
 
+			<th>
+
+			</th>
 			<th>
 
 			</th>
@@ -298,6 +307,7 @@ Pagos e não pagos
 				{ data: "outros", 
 				render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
 				{ data: "total", render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
+				{ data: "valorPlaca", render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
 
 				], 
 
@@ -317,7 +327,7 @@ Pagos e não pagos
 
 			// Total over all pages
 			total = api
-			.column( 12 )
+			.column( 13 )
 			.data()
 			.reduce( function (a, b) {
 				return intVal(a) + intVal(b);
@@ -325,7 +335,7 @@ Pagos e não pagos
 
 			// Total over this page
 			pageTotal = api
-			.column( 12, { page: 'current'} )
+			.column( 13, { page: 'current'} )
 			.data()
 			.reduce( function (a, b) {
 				return intVal(a) + intVal(b);
@@ -335,7 +345,7 @@ Pagos e não pagos
 			var numFormat = $.fn.dataTable.render.number( '.', ',', 2 ).display;
 
 			// Update footer
-			$( api.column( 12 ).footer() ).html(
+			$( api.column( 13 ).footer() ).html(
 				numFormat(pageTotal)
 				);
 		}

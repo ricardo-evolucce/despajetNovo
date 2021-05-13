@@ -212,6 +212,29 @@ Editar serviço de emplacamento
 			
 		</div>
 
+		<div class="row">
+			<div class="col col-6">
+				<label for="valorPlaca">Valor Placa</label>
+				<span class="d-flex">
+					<input type="text" name="valorPlaca" id="valorPlaca" class="form-control mr-2" value="{{$emplacamento->valorPlaca}}">
+					<select class="form-control" name="placaPago">
+						@switch($emplacamento->placaPago)
+							@case(1)
+								<option value="1">Pago</option>
+								<option value="0">Não pago</option>
+							@break
+							@default
+							<option value="0">Não pago</option>
+							<option value="1">Pago</option>
+						@endswitch
+					</select>
+				</span>
+			</div>
+
+			
+			
+		</div>
+
 
 
 

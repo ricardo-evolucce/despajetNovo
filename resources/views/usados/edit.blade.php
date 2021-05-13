@@ -212,6 +212,30 @@ Editar serviço de usado
 			
 		</div>
 
+		<div class="row">
+		
+
+			<div class="col col-6">
+				<label for="valorPlaca">Valor Placa</label>
+				<span class="d-flex">
+					<input type="text" name="valorPlaca" id="valorPlaca" class="form-control mr-2" value="{{$usado->valorPlaca}}">
+					<select class="form-control" name="placaPago">
+							@switch($usado->placaPago)
+								@case(1)
+								<option value="1">Pago</option>
+								<option value="0">Não pago</option>
+								@break
+								@case(0)
+								<option value="0">Não pago</option>
+								<option value="1">Pago</option>
+								@break
+							@endswitch
+					</select>
+				</span>
+			</div>
+			
+		</div>
+
 
 
 

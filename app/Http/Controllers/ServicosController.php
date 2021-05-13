@@ -402,6 +402,8 @@ public function update(Request $request)
     $servico->valorOutros = $request->valorOutros;
     $servico->outrosPago = $request->outrosPago;
     $servico->valorNFe = $request->valorNfe;
+    $servico->valorPlaca = $request->valorPlaca;
+    $servico->placaPago = $request->placaPago;
 
 
 

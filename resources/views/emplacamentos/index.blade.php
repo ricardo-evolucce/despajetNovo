@@ -146,6 +146,9 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 					Outros
 				</th>
 				<th scope="col">
+					Placa
+				</th>
+				<th scope="col">
 					Total
 				</th>
 
@@ -167,7 +170,8 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 					<td  @if($emplacamento->provisorioPago==0) class="text-danger" @endif>{{$emplacamento->valorProvisorio}}</td>
 					<td  @if($emplacamento->placaEspPago==0) class="text-danger" @endif>{{$emplacamento->valorPlacaEsp}}</td>
 					<td  @if($emplacamento->outrosPago==0) class="text-danger" @endif>{{$emplacamento->valorOutros}}</td>
-					<td>{{$emplacamento->valorGuia + $emplacamento->valorIpva + $emplacamento->valorProvisorio + $emplacamento->valorPlacaEsp + $emplacamento->valorOutros}}
+					<td  @if($emplacamento->placaPago==0) class="text-danger" @endif>{{$emplacamento->valorPlaca}}</td>
+					<td>{{$emplacamento->valorGuia + $emplacamento->valorIpva + $emplacamento->valorProvisorio + $emplacamento->valorPlacaEsp + $emplacamento->valorOutros + $emplacamento->valorPlaca}}
 					</td>
 				</tr>
 			@endforeach
@@ -195,6 +199,9 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 				</th>
 				<th>
 					
+				<th>
+					
+				</th>
 				<th>
 					
 				</th>
@@ -248,6 +255,7 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
             { data: "provisorio" , render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
             { data: "placa esp" , render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
             { data: "outros",  render: $.fn.dataTable.render.number( '.', ',', 2, '' ) },
+            { data: "valorPlaca",  render: $.fn.dataTable.render.number( '.', ',', 2, '' ) },
             { data: "total" , render: $.fn.dataTable.render.number( '.', ',', 2, '' )},
           
         ], 
@@ -268,7 +276,7 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
  
             // Total over all pages
             total = api
-                .column( 14 )
+                .column( 15 )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
@@ -276,7 +284,7 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
  
             // Total over this page
             pageTotal = api
-                .column( 14, { page: 'current'} )
+                .column( 15, { page: 'current'} )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
@@ -287,7 +295,7 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
               var numFormat = $.fn.dataTable.render.number( '.', ',', 2 ).display;
  
             // Update footer
-            $( api.column( 14 ).footer() ).html(
+            $( api.column( 15 ).footer() ).html(
                 numFormat(pageTotal)
             );
         }

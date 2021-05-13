@@ -41,7 +41,7 @@ class Servico extends Model
 	'loja_id', 'valorServico', 'servicoPago', 'valorGuia', 'guiaPago', 'valorIpva', 'ipvaPago', 
 	'valorPlacaEsp', 'placaEspPago', 'valorOutros', 'outrosPago',
 	'valorProvisorio', 'provisorioPago', 'numeroPedido', 'valorNfe', 'nfe_id', 'chassi', 'valorGuia',
-	'guiaPago', 'valorPlacaEsp', 'placaEspPago', 'valorProvisorio', 'provisorioPago', 'carhouseOuCliente', 'valorNfe'
+	'guiaPago', 'valorPlacaEsp', 'placaEspPago', 'valorProvisorio', 'provisorioPago', 'carhouseOuCliente', 'valorNfe', 'valorPlaca', 'placaPago'
 	];
 
 
