@@ -66,12 +66,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/register', function() {
-    return redirect('/login');
-});
 
-Route::post('/register', function() {
-    return redirect('/login');
-});
 
 require __DIR__.'/auth.php';

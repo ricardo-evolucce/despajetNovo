@@ -63,4 +63,3 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
 
-Auth::routes(['register' => false]);
