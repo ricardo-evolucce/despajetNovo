@@ -147,6 +147,7 @@ $(document).ready(function () {
                     return button;
                 },
             },
+            { data: "recibo" },
            
         ],
         columnDefs: [

@@ -166,9 +166,9 @@ foreach (['error', 'warning', 'success', 'info'] as $key ){
                 <th scope="col">
                     NFe 
                 </th>
-                <!--<th scope="col">
+                <th scope="col">
                     Recibo
-                </th>-->
+                </th>
 
 			</tr>
 		</thead>
@@ -192,7 +192,7 @@ foreach (['error', 'warning', 'success', 'info'] as $key ){
 				<td  @if($servico->outrosPago==0) class="text-danger" @endif>{{$servico->valorOutros}}</td>
                 <td>{{$servico->valor}}</td>
                 <td>{{$servico->nfe_id}}</td>
-                <!--<td><a href="{{route('pdfRecibo', $servico->id)}}">Recibo</a></td>-->
+                <td><a href="{{route('pdfRecibo', $servico->id)}}">Recibo</a></td>
 			</tr>
 			@endforeach
 
@@ -217,7 +217,7 @@ foreach (['error', 'warning', 'success', 'info'] as $key ){
             <th> </th>
             <th> </th>
             <th> </th>
-            <!--<th> </th>-->
+            <th> </th>
         </tfoot>
     </table>
 </div>
