@@ -10,12 +10,12 @@ use WGenial\NumeroPorExtenso\NumeroPorExtenso;
 
 class PdfReciboController extends Controller
 {
-    public function geraRecibo(){
+    public function geraRecibo(Request $request){
 
     	
 
     	  $servicos = Servico::all();
-    	  $servico = $servicos->find(2);  
+    	  $servico = $servicos->find($request->id);  
 
     	  $valorTotal = $servico->valorServico + $servico->ValorGuia + $servico->valorOutros;
 
