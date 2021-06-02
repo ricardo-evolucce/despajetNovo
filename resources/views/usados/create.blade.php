@@ -111,7 +111,7 @@ Cadastrar serviço de usado
 		<div class="row border-top">
 
 			<div class="col col-6">
-				<label for="valorServico">Valor do serviço</label>
+				<label for="valorServico">Valor da taxa</label>
 				<span class="d-flex">
 					<input type="text" name="valorServico" id="valorServico" class="form-control mr-2">
 					<select class="form-control" name="servicoPago">

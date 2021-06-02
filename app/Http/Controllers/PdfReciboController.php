@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Servico;
+use App\Tiposervico;
 use PDF;
 use WGenial\NumeroPorExtenso\NumeroPorExtenso;
 
@@ -18,6 +19,10 @@ class PdfReciboController extends Controller
     	  $servico = $servicos->find($request->id);  
 
     	  $valorTotal = $servico->valorServico + $servico->valorGuia + $servico->valorOutros + $servico->valorIpva + $servico->valorProvisorio + $servico->valorPlacaEsp + $servico->valorPlaca;
+
+          if(!empty($servico->tiposervico->id) && $servico->tiposervico->id == '3'){
+            $valorTotal = $valorTotal + $servico->valorNfe;
+          }
 
           $valorTaxa = $servico->valorServico + $servico->valorGuia;
 

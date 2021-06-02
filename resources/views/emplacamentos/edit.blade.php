@@ -109,7 +109,7 @@ Editar serviço de emplacamento
 		<div class="row border-top">
 
 			<div class="col col-6">
-				<label for="valorServico">Valor da guia</label>
+				<label for="valorServico">Valor de taxa</label>
 				<span class="d-flex">
 					<input type="text" name="valorGuia" id="valorGuia" class="form-control mr-2" value="{{$emplacamento->valorGuia}}">
 					<select class="form-control" name="guiaPago">

@@ -173,7 +173,7 @@ Pagos e não pagos
 					Loja
 				</th>
 				<th scope="col">
-					Valor Serviço
+					Taxa
 				</th>
 				<th scope="col">
 					IPVA

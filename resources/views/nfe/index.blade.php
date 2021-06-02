@@ -143,10 +143,10 @@ foreach (['error', 'warning', 'success', 'info'] as $key ){
 					Loja
 				</th>
 				<th scope="col">
-					Guia
+					Taxa
 				</th>
 				<th scope="col">
-					Val. Serv.
+					Taxa
 				</th>
 				<th scope="col">
 					IPVA

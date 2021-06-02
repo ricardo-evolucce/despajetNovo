@@ -104,7 +104,7 @@ Criar serviço de emplacamento
 		<div class="row border-top">
 
 			<div class="col col-6">
-				<label for="valorServico">Valor da guia</label>
+				<label for="valorServico">Valor da taxa</label>
 				<span class="d-flex">
 					<input type="text" name="valorGuia" id="valorGuia" class="form-control mr-2">
 					<select class="form-control" name="guiaPago">

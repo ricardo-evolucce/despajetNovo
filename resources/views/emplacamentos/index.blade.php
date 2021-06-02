@@ -131,7 +131,7 @@ Emplacamentos | LOJA: {{$lojaNome = $loja->nome ?? 'Todas'}}
 					Loja
 				</th>
 				<th scope="col">
-					Guia
+					Taxa
 				</th>
 				<th scope="col">
 					IPVA
