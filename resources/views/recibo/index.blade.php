@@ -39,10 +39,12 @@
         </td>
       </tr>
        <tr>
-        <td colspan="4" align="center" style="padding: 20px; font-size: 15px">
-          Recebemos de {{$servico->loja->razaoSocial}}, CNPJ {{$servico->loja->cnpj}},<br>
-          a quantia de {{$valorExtenso}}.<br><br>
-          Referente a: Taxa: R$ {{$servico->valorGuia}}{{$servico->valorServico}}. Digitalização / Outros: R$ {{$servico->valorOutros}}.<br><br>
+        <td colspan="4" align="center" style="padding: 20px; font-size: 15px; text-align: justify;">
+          Recebemos de {{$servico->loja->razaoSocial}}, CNPJ {{$servico->loja->cnpj}},
+          a quantia de {{$valorExtenso}}.<br><br><br>
+          Referente a:<br><br> Taxa: R$ {{$servico->valorGuia}}<br><br> Serviço: R$ {{$servico->valorServico}}<br><br>Digitalização / Outros: R$ {{$servico->valorOutros}}<br><br>
+          Placa Especial: R$ {{$servico->valorPlacaEsp}}<br><br> Placa: R$ {{$servico->valorPlaca}}<br><br> IPVA: R$ {{$servico->valorIPVA}}<br><br>
+          Provisório: R$ {{$servico->valorProvisorio}}<br><br><br>
           Serviço N° {{$servico->id}}, Veículo {{$servico->modelo}}, Placa {{$servico->placa}}, Renavam {{substr($servico->renavam, -6)}}
 
         </td>
