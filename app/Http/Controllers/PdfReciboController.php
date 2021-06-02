@@ -17,7 +17,9 @@ class PdfReciboController extends Controller
     	  $servicos = Servico::all();
     	  $servico = $servicos->find($request->id);  
 
-    	  $valorTotal = $servico->valorServico + $servico->ValorGuia + $servico->valorOutros + $servico->valorIpva + $servico->valorProvisorio + $servico->valorPlacaEsp + $servico->valorPlaca;
+    	  $valorTotal = $servico->valorServico + $servico->valorGuia + $servico->valorOutros + $servico->valorIpva + $servico->valorProvisorio + $servico->valorPlacaEsp + $servico->valorPlaca;
+
+          $valorTaxa = $servico->valorServico + $servico->valorGuia;
 
     	  $valorExtenso = new NumeroPorExtenso;
     	  $valorExtenso = $valorExtenso->converter($valorTotal);
@@ -30,11 +32,12 @@ class PdfReciboController extends Controller
           $servico->valorPlacaEsp = number_format($servico->valorPlacaEsp,2,",","."); 
           $servico->valorPlaca = number_format($servico->valorPlaca,2,",","."); 
     	  $valorTotal = number_format($valorTotal,2,",","."); 
+          $valorTaxa = number_format($valorTaxa,2,",","."); 
 
 
   
     	
-    	$pdf = PDF::loadView('recibo.index' , compact('servico', 'valorExtenso', 'valorTotal'));
+    	$pdf = PDF::loadView('recibo.index' , compact('servico', 'valorExtenso', 'valorTotal', 'valorTaxa'));
 
     	return $pdf->setPaper('a4')->stream('recibo.pdf');
 
