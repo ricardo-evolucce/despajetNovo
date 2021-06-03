@@ -42,7 +42,7 @@
         <td colspan="4" align="center" style="padding: 20px; font-size: 15px; text-align: justify;">
           Recebemos de {{$servico->loja->razaoSocial}}, CNPJ {{$servico->loja->cnpj}},
           a quantia de {{$valorExtenso}}.<br><br><br>
-          Referente a:<br><br> Taxa: R$ {{$valorTaxa}}<br><br>Digitalização / Outros / Doc Digital: R$ {{$servico->valorOutros}}<br><br>
+          Referente a:  {{$servico->tiposervico->nome}}<br><br><br> Taxa: R$ {{$valorTaxa}}<br><br>Digitalização / Outros / Doc Digital: R$ {{$servico->valorOutros}}<br><br>
           Placa Especial: R$ {{$servico->valorPlacaEsp}}<br><br> Placa: R$ {{$servico->valorPlaca}}<br><br> IPVA: R$ {{$servico->valorIpva}}<br><br>
           DCPPO: R$ {{$servico->valorProvisorio}}<br><br>
           @if(!empty($servico->tiposervico->id) && $servico->tiposervico->id == 3)
